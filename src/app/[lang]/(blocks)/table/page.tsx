@@ -5,9 +5,9 @@ import { TasksTable } from "@/components/table/_components/tasks-table";
 import { sampleTasks } from "@/components/table/lib/constants";
 
 export default function IndexPage() {
-  // Mock data instead of database queries
+  // Mock data instead of database queries - create mutable copies
   const mockData = {
-    data: sampleTasks,
+    data: [...sampleTasks],
     pageCount: 1,
   };
 
@@ -34,6 +34,11 @@ export default function IndexPage() {
     mockStatusCounts,
     mockPriorityCounts,
     mockEstimatedHoursRange,
+  ] as [
+    { data: any[]; pageCount: number },
+    any,
+    any,
+    { min: any; max: any }
   ]);
 
   return (
