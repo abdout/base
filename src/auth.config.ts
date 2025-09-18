@@ -37,9 +37,12 @@ export default {
         const mappedProfile = {
           id: profile.sub,
           name: profile.name,
+          username: profile.name,
           email: profile.email,
           image: profile.picture,
           emailVerified: new Date(),
+          role: "USER" as const,
+          isTwoFactorEnabled: false,
         };
         console.log("✅ [Google OAuth] Mapped profile:", JSON.stringify(mappedProfile, null, 2));
         return mappedProfile;
@@ -56,9 +59,12 @@ export default {
         const mappedProfile = {
           id: profile.id,
           name: profile.name || "Facebook User",
+          username: profile.name || "Facebook User",
           email: profile.email || `${profile.id}@facebook.com`,
           image: profile.picture?.data?.url || null,
           emailVerified: new Date(),
+          role: "USER" as const,
+          isTwoFactorEnabled: false,
         };
         console.log("✅ [Facebook OAuth] Mapped profile:", JSON.stringify(mappedProfile, null, 2));
         return mappedProfile;
