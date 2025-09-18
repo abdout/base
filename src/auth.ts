@@ -50,7 +50,7 @@ export const {
       console.log("🔗 [linkAccount Event] OAuth account linked:", {
         userId: user.id,
         email: user.email,
-        name: user.name
+        username: user.name
       });
       try {
         if (user.id) {
@@ -68,7 +68,7 @@ export const {
       console.log("🔐 [signIn Event] Sign-in attempt:", {
         userId: user.id,
         email: user.email,
-        name: user.name,
+        username: user.name,
         provider: account?.provider,
         isNewUser,
         accountType: account?.type
@@ -78,7 +78,7 @@ export const {
       console.log("👤 [createUser Event] New user created:", {
         userId: user.id,
         email: user.email,
-        name: user.name
+        username: user.name
       });
     }
   },
@@ -92,7 +92,7 @@ export const {
     async signIn({ user, account }) {
       console.log("🔐 [signIn Callback] Processing sign-in:", {
         userId: user.id,
-        name: user.name,
+        username: user.name,
         email: user.email,
         provider: account?.provider,
         providerAccountId: account?.providerAccountId,
@@ -200,7 +200,7 @@ export const {
         console.log("🔍 [JWT Callback] User lookup:", {
           found: !!existingUser,
           userId: existingUser?.id,
-          name: existingUser?.name,
+          username: existingUser?.name,
           email: existingUser?.email
         });
 
