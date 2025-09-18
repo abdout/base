@@ -6,11 +6,9 @@ import Link from "next/link"
 import { DocsSidebar } from "@/components/template/sidebar-01/content"
 import { DocsThemeSwitcher } from "@/components/docs/docs-theme-switcher"
 import { DocsTableOfContents } from "@/components/docs/toc"
-import { type Locale } from "@/components/internationalization/config"
-
 interface DocsLayoutProps {
     children: React.ReactNode
-    params: Promise<{ lang: Locale }>
+    params: Promise<{ lang: string }>
 }
 
 export default async function DocsLayout({ children, params }: DocsLayoutProps) {
