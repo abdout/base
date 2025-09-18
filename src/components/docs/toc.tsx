@@ -113,7 +113,7 @@ export function DocsTableOfContents() {
   return (
     <div 
       className={`hidden xl:block fixed top-20 right-1 w-44 z-20 ${
-        sidebarOpen ? 'hidden' : 'lg:block'
+        sidebarOpen ? 'hidden' : 'lg:blocks'
       }`}
     >
       <ActiveSectionContext.Provider value={activeSection}>

@@ -60,8 +60,8 @@ export function MainNav({ dictionary }: MainNavProps) {
         <Link
           href="/blocks"
           className={cn(
-            pathname?.startsWith("/docs/component/block") ||
-              pathname?.startsWith("/block")
+            pathname?.startsWith("/docs/component/blocks") ||
+              pathname?.startsWith("/blocks")
               ? "text-foreground"
               : ""
           )}

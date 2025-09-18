@@ -2,7 +2,7 @@
 
 /* Image scale hover effect */
 .image-scale-hover {
-  display: block; /* Ensures transform works consistently, might need inline-block depending on layout */
+  display: block; /* Ensures transform works consistently, might need inline-blocks depending on layout */
   transition: transform 0.5s ease-in-out; /* Defines the smooth transition */
   /* You can adjust the duration (0.5s) and timing function (ease-in-out) */
   transform-origin: center center; /* Optional: Ensures scaling happens from the center */

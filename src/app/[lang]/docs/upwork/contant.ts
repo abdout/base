@@ -1,13 +1,13 @@
 export const appsData = [
   {
     name: "Databayt",
-    description: "Business automation platform with comprehensive documentation architecture, hero sections, landing pages, authentication, technical record patterns, MCP protocols, roadmap templates, pricing strategies, and legal compliance block.",
+    description: "Business automation platform with comprehensive documentation architecture, hero sections, landing pages, authentication, technical record patterns, MCP protocols, roadmap templates, pricing strategies, and legal compliance blocks.",
     repositoryUrl: "https://github.com/abdout/databayt",
     previewUrl: "https://databayt.org"
   },
   {
     name: "Codebase",
-    description: "Component library platform featuring shadcn/ui components, atomic templates, dashboard block, authentication forms, payment methods, calendar widgets, navigation patterns, card layouts, and interactive playground sections.",
+    description: "Component library platform featuring shadcn/ui components, atomic templates, dashboard blocks, authentication forms, payment methods, calendar widgets, navigation patterns, card layouts, and interactive playground sections.",
     repositoryUrl: "https://github.com/abdout/codebase",
     previewUrl: "https://cb.databayt.org"
   },

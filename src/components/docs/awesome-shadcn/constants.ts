@@ -109,7 +109,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "eldora",
     title: "Eldora",
     description:
-      "A collection of reusable components to copy and paste into your web apps. Focused on practical building block you can adapt to your design system.",
+      "A collection of reusable components to copy and paste into your web apps. Focused on practical building blocks you can adapt to your design system.",
     link: "https://www.eldoraui.site/",
     repository: "https://github.com/eldoraui/eldoraui",
     tags: ["components"]
@@ -163,7 +163,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "mixcn",
     title: "Mixcn",
     description:
-      "20+ free, open-source animated components implemented with React, TypeScript, Tailwind, and Framer Motion. Optimized for delightful micro-interactions.",
+      "20+ free, open-source animated components implemented with React, TypeScript, Tailwind, and Framer Motion. Optimized for delightful micros-interactions.",
     link: "https://mixcn-ui.vercel.app/",
     repository: "https://github.com/mixcn-ui/mixcn-ui",
     tags: ["components", "animated", "modern"]
@@ -172,7 +172,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "edil-ozi",
     title: "Edil Ozi Components",
     description:
-      "Open-source components you can copy and paste into your apps. Focused on developer ergonomics and practical building block.",
+      "Open-source components you can copy and paste into your apps. Focused on developer ergonomics and practical building blocks.",
     link: "https://www.edil-ozi.pro/",
     repository: "https://github.com/edil-ozi/edil-ozi",
     tags: ["components"]
@@ -226,7 +226,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "worigami",
     title: "Worigami",
     description:
-      "React shadcn component library offering many useful block to simply copy and paste in your apps for quick assembly.",
+      "React shadcn component library offering many useful blocks to simply copy and paste in your apps for quick assembly.",
     link: "https://htmlrev.com/free-shadcn-templates.html",
     repository: "https://github.com/htmlrev/free-shadcn-templates",
     tags: ["components", "templates"]
@@ -264,7 +264,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "blocks",
     title: "Blocks",
     description:
-      "Premium collection of 700+ uniquely crafted block and components tailored for shadcn/ui, Tailwind, and React. High-quality, interactive, and fully responsive sections for building landing and marketing pages in minutes. Lifetime access and updates.",
+      "Premium collection of 700+ uniquely crafted blocks and components tailored for shadcn/ui, Tailwind, and React. High-quality, interactive, and fully responsive sections for building landing and marketing pages in minutes. Lifetime access and updates.",
     link: "https://www.shadcnblocks.com/",
     repository: "https://github.com/shadcnblocks/shadcnblocks",
     tags: ["templates", "components", "specialized", "enhanced"]
@@ -273,7 +273,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "shadcn-kit",
     title: "ShadcnKit",
     description:
-      "Prebuilt components, block, and pages to ship faster: 400+ tiny components, 100+ prebuilt pages, and 12+ dashboards. Built with Next.js and shadcn/ui, includes a fully customizable Figma version and theme support.",
+      "Prebuilt components, blocks, and pages to ship faster: 400+ tiny components, 100+ prebuilt pages, and 12+ dashboards. Built with Next.js and shadcn/ui, includes a fully customizable Figma version and theme support.",
     link: "https://kit.shadcnui.com/",
     repository: "https://github.com/shadcnui/kit",
     tags: ["templates", "components", "specialized", "enhanced"]
@@ -282,13 +282,13 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "tailark",
     title: "Tailark",
     description:
-      "Modern, responsive, pre-built UI block for creating marketing websites with Shadcn UI. Accelerate page assembly with opinionated, polished sections.",
+      "Modern, responsive, pre-built UI blocks for creating marketing websites with Shadcn UI. Accelerate page assembly with opinionated, polished sections.",
     link: "https://nsui.irung.me/",
     repository: "https://github.com/nsui/nsui",
     tags: ["templates", "specialized"]
   },
   {
-    id: "block-two",
+    id: "blocks-two",
     title: "Blocks two",
     description:
       "Effortless Shadcn UI component previews and code snippets. Offers uniquely designed sections that are fully responsive, easy to copy, and free to use with multiple variants.",
@@ -300,7 +300,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "twblocks",
     title: "TWBlocks",
     description:
-      "Website block to copy/paste, based on shadcn and Radix using Tailwind and Next.js. Useful for fast composition of landing pages.",
+      "Website blocks to copy/paste, based on shadcn and Radix using Tailwind and Next.js. Useful for fast composition of landing pages.",
     link: "https://www.shadcntemplates.com/theme/tommyjepsen-twblocks/",
     repository: "https://github.com/tommyjepsen/twblocks",
     tags: ["templates", "specialized"]
@@ -371,7 +371,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     tags: ["templates"]
   },
   {
-    id: "shadcn-block",
+    id: "shadcn-blocks",
     title: "ShadcnBlocks",
     description:
       "Modern and clean design with fully responsive layout. Built with Next.js 15, Tailwind CSS 3.4 & 4.0, and Shadcn UI Blocks for rapid development.",
@@ -401,7 +401,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "convertfast",
     title: "ConvertFast",
     description:
-      "Build beautiful landing pages with prebuilt code block. All based on shadcn-ui and tailwind. Includes CLI for developers to generate landing pages with ease.",
+      "Build beautiful landing pages with prebuilt code blocks. All based on shadcn-ui and tailwind. Includes CLI for developers to generate landing pages with ease.",
     link: "https://ui.convertfa.st/",
     repository: "https://github.com/convertfa/convertfa",
     tags: ["templates", "landing", "modern"]
@@ -788,7 +788,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "twblocks-saas",
     title: "TWBlocks SaaS",
     description:
-      "Beautifully designed website block for your SaaS website. Easily customizable with shadcn-ui themes and works in dark- and light mode.",
+      "Beautifully designed website blocks for your SaaS website. Easily customizable with shadcn-ui themes and works in dark- and light mode.",
     link: "https://www.twblocks.com",
     repository: "https://github.com/twblocks/twblocks",
     tags: ["templates", "specialized", "saas"]
@@ -1629,7 +1629,7 @@ export const awesomeShadcn: AwesomeShadcnItem[] = [
     id: "21st",
     title: "21st",
     description:
-      "Marketplace for shadcn/ui-based React Tailwind components, block, and hooks (an \"npm for design engineers\"). Highlights the ecosystem's commercial maturity.",
+      "Marketplace for shadcn/ui-based React Tailwind components, blocks, and hooks (an \"npm for design engineers\"). Highlights the ecosystem's commercial maturity.",
     link: "https://21st.dev/",
     repository: "https://github.com/21st/21st",
     tags: ["templates", "enhanced"]

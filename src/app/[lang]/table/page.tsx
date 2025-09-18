@@ -34,7 +34,7 @@ export default function IndexPage() {
     mockStatusCounts,
     mockPriorityCounts,
     mockEstimatedHoursRange,
-  ]);
+  ] as const);
 
   return (
     <Shell className="gap-2">

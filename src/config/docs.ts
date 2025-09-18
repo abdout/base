@@ -21,6 +21,18 @@ export const docsConfig: DocsConfig = {
       href: "/docs/components/accordion",
     },
     {
+      title: "Block",
+      href: "/blocks",
+    },
+    {
+      title: "Micro",
+      href: "/micros",
+    },
+    {
+      title: "Vibe",
+      href: "/vibes",
+    },
+    {
       title: "templates",
       href: "/templates",
     },
