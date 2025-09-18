@@ -1,0 +1,73 @@
+.progress {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--color-accent);
+    bottom: 100px;
+  }
+  
+  .parallax-section {
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+  
+  .parallax {
+    overflow: hidden;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 160px;
+    align-items: center;
+  }
+  
+  .parallax .scroller {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(6rem, 14vw, 12rem);
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+  
+  .parallax .scroller .ar-font {
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+  }
+  
+  .parallax span {
+    display: block;
+    margin-right: 2rem;
+    border: none;
+    outline: none;
+  }
+  
+  .parallax span.solid {
+    color: var(--color-foreground);
+  }
+  
+  .parallax span.outline {
+    color: transparent;
+    -webkit-text-stroke: 3px var(--color-foreground);
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  
+  @media (max-width: 768px) {
+    .parallax {
+      height: 120px;
+    }
+    
+    .parallax span.outline {
+      -webkit-text-stroke: 2px var(--color-foreground);
+    }
+    
+    .parallax span {
+      margin-right: 1rem;
+    }
+  }
+  
