@@ -1,4 +1,4 @@
-import BlockContent from "@/components/block/content";
+import BlockContent from "@/components/root/block/content";
 import { getDictionary } from "@/components/internationalization/dictionaries";
 import { type Locale } from "@/components/internationalization/config";
 

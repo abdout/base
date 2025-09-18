@@ -15,15 +15,15 @@ export default function Card({ id, title, description, icon, href, className = "
     <Link
       key={id}
       href={href}
-      className={`group relative overflow-hidden rounded-lg border bg-background p-2 transition-all hover:border-primary ${className}`}
+      className={`relative overflow-hidden rounded-lg border bg-background p-2 transition-[border-color] hover:border-primary hover:text-current ${className}`}
     >
       <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-        {icon}
+        <div className="w-8 h-8">{icon}</div>
         <div className="space-y-2">
-          <h5 className="transition-colors group-hover:text-primary">
+          <h4 className="hover:text-current">
             {title}
-          </h5>
-          <p className="text-sm text-muted-foreground">
+          </h4>
+          <p className="text-sm text-muted-foreground hover:text-muted-foreground">
             {description}
           </p>
         </div>

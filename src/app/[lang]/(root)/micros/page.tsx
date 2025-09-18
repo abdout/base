@@ -1,4 +1,4 @@
-import MicroContent from "@/components/micro/content";
+import MicroContent from "@/components/root/micro/content";
 import { getDictionary } from "@/components/internationalization/dictionaries";
 import { type Locale } from "@/components/internationalization/config";
 

@@ -1,4 +1,4 @@
-import VibeContent from "@/components/vibe/content";
+import VibeContent from "@/components/root/vibe/content";
 import { getDictionary } from "@/components/internationalization/dictionaries";
 import { type Locale } from "@/components/internationalization/config";
 
