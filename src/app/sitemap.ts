@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { type Locale, i18n } from '@/components/internationalization/config';
 
-const locales: Locale[] = i18n.locales;
+const locales: Locale[] = [...i18n.locales];
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
 
 // Define all your pages here
