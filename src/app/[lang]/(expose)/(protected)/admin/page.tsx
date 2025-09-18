@@ -13,13 +13,17 @@ const AdminPage = () => {
   const onServerActionClick = () => {
     admin()
       .then((data) => {
-        if (data.error) {
+        if (data?.error) {
           toast.error(data.error);
         }
 
-        if (data.success) {
+        if (data?.success) {
           toast.success(data.success);
         }
+      })
+      .catch((error) => {
+        toast.error("An error occurred");
+        console.error(error);
       })
   }
   
