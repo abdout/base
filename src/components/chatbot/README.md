@@ -161,7 +161,7 @@ src/components/chatbot/
 ├── actions.ts           # Server actions (NEW)
 ├── icons.tsx            # Custom SVG icons
 ├── type.ts              # TypeScript types
-├── constant.ts          # Default configurations
+├── config.ts          # Default configurations
 ├── utils.ts             # Helper utilities
 └── README.md            # This file
 ```

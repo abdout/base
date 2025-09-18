@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { docsConfig } from "@/config/docs"
+import { docsConfig } from "./config"
 
 // Flatten the sidebar navigation to a single list
 function flattenSidebarNav(items: typeof docsConfig.sidebarNav) {
@@ -50,7 +50,7 @@ function flattenSidebarNav(items: typeof docsConfig.sidebarNav) {
   return flatItems
 }
 
-export function DocsAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function DocsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
   const { setOpenMobile } = useSidebar()
   const flatNavItems = React.useMemo(() => flattenSidebarNav(docsConfig.sidebarNav), [])
@@ -60,24 +60,24 @@ export function DocsAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar
   }, [setOpenMobile])
 
   return (
-    <Sidebar
-      {...props}
-      className="w-56 !bg-transparent"
+    <Sidebar 
+      {...props} 
+      className="w-56 "
     >
-      <SidebarHeader className="">
+      <SidebarHeader className=" ">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/docs" className="flex items-center" onClick={handleLinkClick}>
                 <div className="flex flex-col leading-none">
-                  <span className="font-medium text-base text-foreground -ml-1">Documentation</span>
+                  <span className="font-medium text-foreground -ml-1">Documentation</span>
                 </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="border-0 bg-transparent">
         <ScrollArea className="h-full">
           <SidebarGroup className="p-2">
             <SidebarMenu className="space-y-1">
@@ -85,8 +85,8 @@ export function DocsAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                 const isActive = pathname === item.href
                 return (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive} size="default">
-                      <Link href={item.href} className="text-base font-normal" onClick={handleLinkClick}>
+                    <SidebarMenuButton asChild isActive={isActive} size="sm">
+                      <Link href={item.href} className="muted" onClick={handleLinkClick}>
                         {item.title}
                       </Link>
                     </SidebarMenuButton>
@@ -99,4 +99,4 @@ export function DocsAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar
       </SidebarContent>
     </Sidebar>
   )
-}
+} 
