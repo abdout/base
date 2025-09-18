@@ -6,6 +6,7 @@ import Link from "next/link"
 import { DocsSidebar } from "@/components/template/sidebar-01/content"
 import { DocsThemeSwitcher } from "@/components/docs/docs-theme-switcher"
 import { DocsTableOfContents } from "@/components/docs/toc"
+import "../../globals.css"
 interface DocsLayoutProps {
     children: React.ReactNode
     params: Promise<{ lang: string }>
@@ -35,8 +36,8 @@ export default async function DocsLayout({ children, params }: DocsLayoutProps) 
                         <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
                         <DocsThemeSwitcher />
                     </header>
-                    <div className="flex flex-1 flex-col p-4">
-                        <div className="w-full">
+                    <div className="flex flex-1 flex-col">
+                        <div className="layout-container w-full">
                             <main className="relative py-6 lg:gap-10 lg:pt-3 lg:pb-8">
                                 <div className="w-full min-w-0 max-w-[52rem]">
                                     {children}

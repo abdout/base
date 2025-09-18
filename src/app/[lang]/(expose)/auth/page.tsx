@@ -1,12 +1,9 @@
-import GithubButton from '@/components/atom/github-button'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
 
 const Auth = () => {
   return (
-    <>
-    <GithubButton url="https://github.com/abdout/auth" />
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="space-y-4 text-center">
         <div className="flex justify-center items-center space-x-2">
@@ -36,7 +33,6 @@ const Auth = () => {
         </div>
       </div>
     </div>
-    </>
   )
 }
 

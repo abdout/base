@@ -70,7 +70,7 @@ export function DocsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
             <SidebarMenuButton size="lg" asChild>
               <Link href="/docs" className="flex items-center" onClick={handleLinkClick}>
                 <div className="flex flex-col leading-none">
-                  <span className="font-medium text-foreground -ml-1">Documentation</span>
+                  <span className="text-base font-semibold text-foreground -ml-1">Documentation</span>
                 </div>
               </Link>
             </SidebarMenuButton>

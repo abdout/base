@@ -1,4 +1,4 @@
-import TaxonomyHeader from "@/components/template/header-taxonomy/taxonomy-header";
+import TaxonomyHeader from "@/components/template/header-02/taxonomy-header";
 
 
 interface ProtectedLayoutProps {
