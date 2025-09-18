@@ -10,10 +10,11 @@ import { type Locale } from "@/components/internationalization/config"
 
 interface DocsLayoutProps {
     children: React.ReactNode
-    params: { lang: Locale }
+    params: Promise<{ lang: Locale }>
 }
 
-export default function DocsLayout({ children, params }: DocsLayoutProps) {
+export default async function DocsLayout({ children, params }: DocsLayoutProps) {
+    const { lang } = await params
     // Docs are always in English, regardless of the lang parameter
     // This ensures documentation remains consistent and accessible
     return (
@@ -25,7 +26,7 @@ export default function DocsLayout({ children, params }: DocsLayoutProps) {
                         <SidebarTrigger className="size-7" />
                         <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
                         <Button variant="ghost" size="icon" className="size-7" asChild>
-                            <Link href={`/${params.lang}`}>
+                            <Link href={`/${lang}`}>
                                 <Home className="h-4 w-4" />
                             </Link>
                         </Button>

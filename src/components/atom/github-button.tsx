@@ -10,7 +10,7 @@ interface GitHubButtonProps {
   size?: "default" | "sm" | "lg" | "icon"
 }
 
-export function GitHubButton({
+export default function GitHubButton({
   href,
   children,
   className,

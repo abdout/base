@@ -14,7 +14,7 @@ interface TaxonomyHeaderProps {
     dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export function TaxonomyHeader({ dictionary }: TaxonomyHeaderProps) {
+export default function TaxonomyHeader({ dictionary }: TaxonomyHeaderProps) {
     return (
         <header className="border-grid sticky top-0 z-50 w-full border-b-[0.5px] bg-background">
             <div className="flex h-14 items-center gap-2 md:gap-4">
