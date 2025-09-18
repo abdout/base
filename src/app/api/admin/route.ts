@@ -3,6 +3,9 @@
 import { NextResponse } from "next/server";
 import { currentRole } from "@/components/auth/auth";
 
+// Force Node.js runtime (required for auth functions that use Prisma)
+export const runtime = 'nodejs'
+
 export async function GET() {
   try {
     const role = await currentRole();

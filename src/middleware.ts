@@ -99,6 +99,9 @@ export default auth((req) => {
   return
 })
 
+// Force Node.js runtime for middleware (required for Prisma and bcryptjs)
+export const runtime = 'nodejs'
+
 export const config = {
   matcher: ['/((?!api|_next|_static|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)'],
 }
