@@ -207,7 +207,6 @@ export const {
         console.log("🔍 [JWT Callback] User lookup:", {
           found: !!existingUser,
           userId: existingUser?.id,
-          username: existingUser?.username,
           email: existingUser?.email
         });
 

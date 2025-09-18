@@ -22,7 +22,7 @@ export default function BlocksPage() {
             id={block.id}
             title={block.title}
             description={block.description}
-            icon={IconComponent ? <IconComponent fill={block.iconFill} /> : null}
+            icon={IconComponent ? <IconComponent className={block.iconFill ? "fill-current" : ""} /> : null}
             href={block.href}
           />
         )

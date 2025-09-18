@@ -64,11 +64,59 @@
   "actions": {
     "getStarted": "Get Started",
     "documentation": "Documentation",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "browseBlocks": "Browse Blocks",
+    "addBlock": "Add Block",
+    "browseMicros": "Browse Micros",
+    "addMicro": "Add Micro",
+    "browseVibes": "Browse Vibes",
+    "addVibe": "Add Vibe"
   },
   "homepage": {
     "heading": "Build your code library",
     "description": "A set of beautifully-designed, blazing-fast code. Works with your favorite frameworks. Open Source. Open Code."
+  },
+  "blockpage": {
+    "heading": "Building Blocks for the Web",
+    "description": "Clean, modern building blocks. Copy and paste into your apps. Works with all React frameworks. Open Source. Open Code."
+  },
+  "block": {
+    "all": "All Blocks",
+    "new": "New Block",
+    "category": "Category",
+    "framework": "Framework",
+    "hero": "Hero",
+    "features": "Features",
+    "testimonials": "Testimonials",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "footer": "Footer",
+    "components": "Components"
+  },
+  "micropage": {
+    "heading": "Micro Components",
+    "description": "Small, focused components for specific tasks. Lightweight and reusable. Perfect for micro-interactions."
+  },
+  "micro": {
+    "all": "All Micros",
+    "new": "New Micro",
+    "category": "Category",
+    "framework": "Framework",
+    "buttons": "Buttons",
+    "inputs": "Inputs",
+    "cards": "Cards",
+    "badges": "Badges",
+    "avatars": "Avatars"
+  },
+  "vibepage": {
+    "heading": "Design Vibes",
+    "description": "Beautiful design patterns and visual styles. Capture the perfect aesthetic for your project."
+  },
+  "vibe": {
+    "all": "All Vibes",
+    "new": "New Vibe",
+    "category": "Category",
+    "style": "Style"
   },
   "auth": {
     "signIn": "Sign In",
@@ -541,6 +589,9 @@
     "poweredBy": "Built by",
     "inspiredBy": "Inspired by",
     "sourceCode": "The source code is available on",
+    "shadcn": "shadcn/ui",
+    "databayt": "Databayt",
+    "github": "GitHub",
     "data": {
       "product": [
         "Web Design",

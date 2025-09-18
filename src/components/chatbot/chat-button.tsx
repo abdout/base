@@ -14,8 +14,8 @@ export function ChatButton({
   dictionary 
 }: ChatButtonProps) {
   const [shouldInvert, setShouldInvert] = useState(false);
-  const checkTimeoutRef = useRef<NodeJS.Timeout>();
-  const rafRef = useRef<number>();
+  const checkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const checkSections = () => {

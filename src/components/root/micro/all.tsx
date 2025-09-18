@@ -43,7 +43,7 @@ export default function MicrosPage() {
             id={micro.id}
             title={micro.title}
             description={micro.description}
-            icon={IconComponent ? <IconComponent fill={micro.iconFill} /> : null}
+            icon={IconComponent ? <IconComponent className={micro.iconFill ? "fill-current" : ""} /> : null}
             href={micro.href}
           />
         )
