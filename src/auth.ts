@@ -17,7 +17,14 @@ declare module "next-auth" {
       role: UserRole
       isTwoFactorEnabled: boolean
       isOAuth: boolean
+      username?: string
     } & DefaultSession["user"]
+  }
+
+  interface User {
+    username?: string
+    role: UserRole
+    isTwoFactorEnabled: boolean
   }
 }
 
