@@ -17,8 +17,7 @@ export default auth((req) => {
     path: nextUrl.pathname,
     isLoggedIn,
     authExists: !!req.auth,
-    userId: req.auth?.user?.id,
-    provider: req.auth?.provider
+    userId: req.auth?.user?.id
   })
 
   let pathname = nextUrl.pathname

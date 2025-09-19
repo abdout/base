@@ -106,7 +106,9 @@
     "inputs": "Inputs",
     "cards": "Cards",
     "badges": "Badges",
-    "avatars": "Avatars"
+    "avatars": "Avatars",
+    "icons": "Icons",
+    "components": "Micro Components"
   },
   "vibepage": {
     "heading": "Design Vibes",
@@ -116,7 +118,14 @@
     "all": "All Vibes",
     "new": "New Vibe",
     "category": "Category",
-    "style": "Style"
+    "style": "Style",
+    "animations": "Animations",
+    "gradients": "Gradients",
+    "patterns": "Patterns",
+    "effects": "Effects",
+    "themes": "Themes",
+    "typography": "Typography",
+    "components": "Vibe Components"
   },
   "auth": {
     "signIn": "Sign In",

@@ -47,7 +47,8 @@ const SettingsPage = () => {
 
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
-  const { update } = useSession();
+  const session = useSession();
+  const update = session?.update;
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof SettingsSchema>>({
@@ -71,7 +72,7 @@ const SettingsPage = () => {
           }
 
           if (data.success) {
-            update();
+            update?.();
             setSuccess(data.success);
           }
         })

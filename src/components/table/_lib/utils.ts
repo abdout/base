@@ -30,7 +30,6 @@ export function generateRandomTask(): Omit<Task, "id"> {
   const priorityValues: TaskPriority[] = ["low", "medium", "high"];
 
   return {
-    code: `TASK-${customAlphabet("0123456789", 4)()}`,
     title: faker.hacker
       .phrase()
       .replace(/^./, (letter) => letter.toUpperCase()),
@@ -38,7 +37,6 @@ export function generateRandomTask(): Omit<Task, "id"> {
     status: faker.helpers.shuffle(statusValues)[0] ?? "todo",
     label: faker.helpers.shuffle(labelValues)[0] ?? "bug",
     priority: faker.helpers.shuffle(priorityValues)[0] ?? "low",
-    archived: faker.datatype.boolean({ probability: 0.2 }),
     createdAt: new Date(),
     updatedAt: new Date(),
   };

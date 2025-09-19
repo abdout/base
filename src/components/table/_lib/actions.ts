@@ -40,11 +40,11 @@ export async function createTask(input: CreateTaskSchema) {
     await db.$transaction(async (tx) => {
       const newTask = await tx.task.create({
         data: {
-          code: `TASK-${customAlphabet("0123456789", 4)()}`,
           title: input.title,
           status: input.status,
           label: input.label,
           priority: input.priority,
+          estimatedHours: input.estimatedHours,
         },
         select: {
           id: true,

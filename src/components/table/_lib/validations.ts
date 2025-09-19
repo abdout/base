@@ -39,7 +39,7 @@ export const createTaskSchema = z.object({
   label: z.enum(["bug", "feature", "enhancement", "documentation"]),
   status: z.enum(["todo", "in_progress", "done", "canceled"]),
   priority: z.enum(["low", "medium", "high"]),
-  estimatedHours: z.coerce.number().optional(),
+  estimatedHours: z.number().optional(),
 });
 
 export const updateTaskSchema = z.object({
@@ -47,7 +47,7 @@ export const updateTaskSchema = z.object({
   label: z.enum(["bug", "feature", "enhancement", "documentation"]).optional(),
   status: z.enum(["todo", "in_progress", "done", "canceled"]).optional(),
   priority: z.enum(["low", "medium", "high"]).optional(),
-  estimatedHours: z.coerce.number().optional(),
+  estimatedHours: z.number().optional(),
 });
 
 export type GetTasksSchema = Awaited<

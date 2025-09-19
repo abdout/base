@@ -22,7 +22,7 @@ export default function VibesPage() {
             id={vibe.id}
             title={vibe.title}
             description={vibe.description}
-            icon={IconComponent ? <IconComponent fill={vibe.iconFill} /> : null}
+            icon={IconComponent ? <IconComponent className={vibe.iconFill ? "fill-current" : ""} /> : null}
             href={vibe.href}
           />
         )

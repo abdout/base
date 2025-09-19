@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 import { UserInfo } from "@/components/auth/user-info";
 import { currentUser } from "@/lib/auth";
 
