@@ -13,11 +13,17 @@ export default auth((req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
+  // Construct proper base URL for redirects
+  const protocol = req.headers?.get('x-forwarded-proto') || 'https'
+  const host = req.headers?.get('host') || req.headers?.get('x-forwarded-host')
+  const baseUrl = host ? `${protocol}://${host}` : nextUrl.origin
+
   console.log("🌐 [Middleware] Request:", {
     path: nextUrl.pathname,
     isLoggedIn,
     authExists: !!req.auth,
-    userId: req.auth?.user?.id
+    userId: req.auth?.user?.id,
+    baseUrl
   })
 
   let pathname = nextUrl.pathname
@@ -68,7 +74,7 @@ export default auth((req) => {
       const redirectUrl = currentLocale
         ? `/${currentLocale}${DEFAULT_LOGIN_REDIRECT}`
         : DEFAULT_LOGIN_REDIRECT
-      return Response.redirect(new URL(redirectUrl, req.url))
+      return Response.redirect(new URL(redirectUrl, baseUrl))
     }
     console.log("✅ [Middleware] Auth route accessible (not logged in)");
     return
@@ -82,7 +88,7 @@ export default auth((req) => {
       ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
       : `/login?callbackUrl=${encodedCallbackUrl}`
 
-    return Response.redirect(new URL(loginUrl, req.url))
+    return Response.redirect(new URL(loginUrl, baseUrl))
   }
 
   if (!isLoggedIn && !isPublicRoute) {
@@ -92,7 +98,7 @@ export default auth((req) => {
       ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
       : `/login?callbackUrl=${encodedCallbackUrl}`
 
-    return Response.redirect(new URL(loginUrl, req.url))
+    return Response.redirect(new URL(loginUrl, baseUrl))
   }
 
   return
