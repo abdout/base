@@ -385,3 +385,5 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
     </div>
   );
 }
+
+export { PasteImport };

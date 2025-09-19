@@ -1,14 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Chat } from "./chat"
-import { Message } from "@/components/template/chatbot/chat-message"
+import { Chat, Message } from "./chat"
 import { cn } from "@/lib/utils"
 import { DEFAULT_REPOSITORIES } from "./repo"
 import { analyzeJobDescription, JobAnalysis } from "./score"
 import { generateProposal } from "./proposal"
 import { v4 as uuid } from "uuid"
-import PageHeader from "@/components/atom/page-header"
+import { PageHeader } from "@/components/atom/page-header"
 // import ProviderSelect from "./model"
 
 // Suggestions that fit Upwork usage
