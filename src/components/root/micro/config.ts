@@ -76,7 +76,7 @@ export const micros: MicroItem[] = [
   {
     id: "leads",
     title: "Leads",
-    description: "Automate lead tracking and customer relation.",
+    description: "Automate leads tracking and customer relation.",
     icon: "LeadsIcon",
     href: "https://block.databayt.org/leads",
   },

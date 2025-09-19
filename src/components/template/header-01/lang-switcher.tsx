@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
-import { i18n, localeConfig, type Locale } from "@/components/internationalization/config"
+import { i18n, localeConfig, type Locale } from "@/components/local/config"
 
 export function LangSwitcher() {
   const pathname = usePathname()

@@ -1,6 +1,6 @@
 import {SiteHeader} from "@/components/template/header-01/content";
-import { getDictionary } from "@/components/internationalization/dictionaries";
-import { type Locale, localeConfig } from "@/components/internationalization/config";
+import { getDictionary } from "@/components/local/dictionaries";
+import { type Locale, localeConfig } from "@/components/local/config";
 import {SiteFooter} from "@/components/template/footer-01/content";
 
 

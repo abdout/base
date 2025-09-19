@@ -1,0 +1,6 @@
+# Add these lines to your .gitignore file:
+
+# MCP configuration (contains API keys)
+.env.mcp
+# But allow the example file
+!.env.mcp.example

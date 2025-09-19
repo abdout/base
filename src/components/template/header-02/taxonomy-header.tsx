@@ -8,7 +8,7 @@ import { MobileNav } from "../header-01/mobile-nav"
 import { ModeSwitcher } from "../header-01/mode-switcher"
 import { LangSwitcher } from "../header-01/lang-switcher"
 import { Button } from "@/components/ui/button"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface TaxonomyHeaderProps {
     dictionary?: Awaited<ReturnType<typeof getDictionary>>

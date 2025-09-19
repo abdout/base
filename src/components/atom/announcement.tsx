@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, ArrowLeft } from "lucide-react"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface AnnouncementProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

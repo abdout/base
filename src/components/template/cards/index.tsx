@@ -10,7 +10,7 @@ import { CardsReportIssue } from "@/components/template/cards/report-issue"
 import { CardsShare } from "@/components/template/cards/share"
 import { CardsStats } from "@/components/template/cards/stats"
 import { CardsTeamMembers } from "@/components/template/cards/team-members"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface CardsDemoProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

@@ -18,7 +18,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface CommandMenuProps extends DialogProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

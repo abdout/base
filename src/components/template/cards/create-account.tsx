@@ -1,7 +1,7 @@
 "use client"
 
 import { Icons } from "@/components/atom/icons"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 import { Button } from "@/components/ui/button"
 import {
   Card,

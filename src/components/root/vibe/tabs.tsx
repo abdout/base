@@ -1,7 +1,7 @@
 "use client"
 
 import { TabsNav } from "@/components/atom/tabs"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface VibeTabsProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

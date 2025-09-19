@@ -68,7 +68,7 @@ Request → Middleware → Locale Detection → Dictionary Loading → Props →
 ### Required Dependencies
 
 ```bash
-# Core internationalization libraries
+# Core local libraries
 pnpm add @formatjs/intl-localematcher negotiator
 
 # TypeScript support
@@ -271,7 +271,7 @@ Create/Update `src/middleware.ts`:
 
 ```typescript
 import { NextRequest } from 'next/server';
-import { localizationMiddleware } from './components/internationalization/middleware';
+import { localizationMiddleware } from './components/local/middleware';
 
 // Matcher ignoring `/_next/`, `/api/`, and static files
 export const config = {
@@ -387,8 +387,8 @@ Create `src/app/[lang]/layout.tsx`:
 ```typescript
 import type { Metadata } from "next";
 import { Inter, Rubik } from "next/font/google";
-import { getDictionary } from "@/components/internationalization/dictionaries";
-import { type Locale, localeConfig } from "@/components/internationalization/i18n-config";
+import { getDictionary } from "@/components/local/dictionaries";
+import { type Locale, localeConfig } from "@/components/local/i18n-config";
 import "../globals.css";
 
 // Configure fonts
@@ -460,8 +460,8 @@ export function generateStaticParams() {
 Create `src/app/[lang]/page.tsx`:
 
 ```typescript
-import { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/i18n-config';
+import { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/i18n-config';
 import { CounterComponent } from '@/components/counter-component';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
@@ -511,15 +511,15 @@ pnpm add -D @types/negotiator
 ### Step 2: Create Feature Directory
 
 ```bash
-mkdir -p src/components/internationalization
+mkdir -p src/components/local
 ```
 
 ### Step 3: Move Existing i18n Files
 
 ```bash
 # Move existing translation files to new structure
-mv src/lib/dictionaries/* src/components/internationalization/
-mv src/lib/locales/* src/components/internationalization/
+mv src/lib/dictionaries/* src/components/local/
+mv src/lib/locales/* src/components/local/
 ```
 
 ### Step 4: Update Imports
@@ -532,7 +532,7 @@ import { getDictionary } from '@/lib/dictionaries';
 import { useTranslations } from '@/lib/use-translations';
 
 // ✅ New imports
-import { getDictionary } from '@/components/internationalization/dictionaries';
+import { getDictionary } from '@/components/local/dictionaries';
 ```
 
 ### Step 5: Restructure App Directory
@@ -563,7 +563,7 @@ export function MyComponent() {
 
 // ✅ New pattern
 'use client';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
+import type { getDictionary } from '@/components/local/dictionaries';
 
 export function MyComponent({
   dictionary,
@@ -579,8 +579,8 @@ export function MyComponent({
 ### Server Components
 
 ```typescript
-import { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/i18n-config';
+import { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/i18n-config';
 
 export default async function ServerComponent({
   params: { lang },
@@ -604,7 +604,7 @@ export default async function ServerComponent({
 'use client';
 
 import { useState } from 'react';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
+import type { getDictionary } from '@/components/local/dictionaries';
 
 export function CounterComponent({
   dictionary,
@@ -633,8 +633,8 @@ export function CounterComponent({
 'use client';
 
 import Link from 'next/link';
-import { useSwitchLocaleHref } from '@/components/internationalization/use-locale';
-import { i18n, localeConfig, type Locale } from '@/components/internationalization/i18n-config';
+import { useSwitchLocaleHref } from '@/components/local/use-locale';
+import { i18n, localeConfig, type Locale } from '@/components/local/i18n-config';
 
 export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   const getSwitchLocaleHref = useSwitchLocaleHref();
@@ -669,8 +669,8 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
 ```typescript
 'use client';
 
-import type { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/i18n-config';
+import type { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/i18n-config';
 
 interface Props {
   dictionary: {

@@ -8,7 +8,7 @@ import { MobileNav } from "./mobile-nav"
 import { ModeSwitcher } from "./mode-switcher"
 import { LangSwitcher } from "./lang-switcher"
 import { Button } from "@/components/ui/button"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface SiteHeaderProps {
     dictionary?: Awaited<ReturnType<typeof getDictionary>>

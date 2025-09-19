@@ -4,7 +4,7 @@ import * as React from "react"
 import { Check, Plus, Send } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 import {
   Avatar,
   AvatarFallback,

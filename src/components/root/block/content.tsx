@@ -1,8 +1,8 @@
 import Hero from './hero';
 import BlockTabs from './tabs';
 import BlocksPage from './all';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/config';
+import type { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/config';
 
 interface BlockContentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>;

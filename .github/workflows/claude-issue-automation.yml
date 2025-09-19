@@ -1,0 +1,132 @@
+name: Issue Automation
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+jobs:
+  bug-investigation:
+    name: Automatic Bug Investigation
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issues' &&
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'bug'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bug Detective Analysis
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the bug-detective subagent to analyze this bug report:
+
+            1. Apply the 5 Whys technique to identify root cause
+            2. Check for similar issues in Next.js 15, Prisma, or NextAuth
+            3. Suggest debugging steps
+            4. Provide hypotheses ranked by likelihood
+            5. Recommend minimal fixes
+
+            Post a detailed analysis as a comment.
+          claude_args: |
+            --max-turns 10
+            --model claude-opus-4-1-20250805
+
+  feature-planning:
+    name: Feature Implementation Planning
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issues' &&
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'enhancement'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Architecture Planning
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the architecture-advisor subagent to create an implementation plan:
+
+            1. Analyze the feature request
+            2. Determine file structure in src/app/[lang]/
+            3. Identify required components (atoms, molecules, organisms)
+            4. Plan runtime strategy (Node.js vs Edge)
+            5. Consider i18n and auth requirements
+            6. Suggest data fetching strategy (SSG/SSR/ISR)
+            7. Create a step-by-step implementation guide
+
+            Post the plan as a comment with specific file paths.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514
+
+  ui-implementation:
+    name: UI/UX Implementation Helper
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issues' &&
+      github.event.action == 'labeled' &&
+      (github.event.label.name == 'ui' ||
+       github.event.label.name == 'ux' ||
+       github.event.label.name == 'design')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ShadCN UI Planning
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the shadcn-ui-specialist subagent to plan UI implementation:
+
+            1. Identify required ShadCN components
+            2. Plan atomic design structure
+            3. Consider existing components in src/components/ui/
+            4. Ensure RTL support for Arabic
+            5. Apply theme variables (OKLCH format)
+            6. Plan responsive layouts with container system
+            7. Include accessibility requirements
+
+            Create a detailed ui-implementation.md plan.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514
+
+  auto-implement-small-fixes:
+    name: Auto-implement Small Fixes
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' &&
+      contains(github.event.comment.body, '@claude implement') &&
+      (contains(github.event.issue.labels.*.name, 'good first issue') ||
+       contains(github.event.issue.labels.*.name, 'quick-fix'))
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Implement Fix
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Implement the fix described in this issue:
+
+            1. Use appropriate subagents for the task
+            2. Follow CLAUDE.md guidelines
+            3. Maintain existing code patterns
+            4. Add proper TypeScript types
+            5. Include i18n support if user-facing
+            6. Create a PR with the implementation
+
+            Use the most appropriate subagent for the task type.
+          claude_args: |
+            --max-turns 20
+            --model claude-opus-4-1-20250805

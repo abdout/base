@@ -1,7 +1,7 @@
 "use client"
 
 import { Line, LineChart } from "recharts"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 import {
   Card,

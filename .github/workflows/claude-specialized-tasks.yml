@@ -1,0 +1,260 @@
+name: Specialized Development Tasks
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Task to perform'
+        required: true
+        type: choice
+        options:
+          - refactor-typography
+          - optimize-performance
+          - update-dependencies
+          - generate-api-types
+          - create-component
+          - setup-feature
+          - fix-accessibility
+          - add-i18n-support
+
+  schedule:
+    # Weekly dependency updates
+    - cron: '0 9 * * 1'
+    # Daily performance check
+    - cron: '0 2 * * *'
+
+jobs:
+  typography-refactor:
+    name: Refactor Typography
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'refactor-typography'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Typography Refactoring
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the typography-refactor subagent to:
+
+            1. Scan for hardcoded text styles (text-*, font-*)
+            2. Convert to semantic HTML elements
+            3. Apply theme variables from globals.css
+            4. Use OKLCH color format
+            5. Ensure hover transitions (muted-foreground → foreground)
+            6. Verify RTL support for Arabic
+
+            Create a PR with all typography improvements.
+          claude_args: |
+            --max-turns 15
+            --model claude-sonnet-4-20250514
+
+  performance-optimization:
+    name: Performance Optimization
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'optimize-performance' || github.event.schedule == '0 2 * * *'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Performance Audit
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the nextjs-expert subagent to optimize performance:
+
+            1. Analyze bundle size and code splitting
+            2. Review image optimization
+            3. Check runtime strategy (Node.js vs Edge)
+            4. Optimize Prisma queries (N+1 prevention)
+            5. Review React component memoization
+            6. Check Suspense boundaries
+            7. Analyze SSG/SSR/ISR usage
+
+            Create a detailed report and implement critical fixes.
+          claude_args: |
+            --max-turns 12
+            --model claude-opus-4-1-20250805
+
+  dependency-updates:
+    name: Smart Dependency Updates
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'update-dependencies' || github.event.schedule == '0 9 * * 1'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update Dependencies
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Intelligently update dependencies:
+
+            1. Check for security vulnerabilities
+            2. Update patch versions safely
+            3. Review breaking changes for major updates
+            4. Test compatibility with:
+               - Next.js 15.5.3
+               - React 19.1.0
+               - Prisma 6.16.2
+               - NextAuth v5 beta
+            5. Update type definitions
+            6. Run build to verify
+
+            Only update if safe and beneficial.
+            Create a PR with clear changelog.
+          claude_args: |
+            --max-turns 10
+            --model claude-sonnet-4-20250514
+
+  api-type-generation:
+    name: Generate API Types
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'generate-api-types'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Types
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the typescript-pro subagent to:
+
+            1. Analyze all API routes in src/app/api/
+            2. Generate comprehensive TypeScript types
+            3. Create type-safe API client
+            4. Add Zod validation schemas
+            5. Generate Prisma types if needed
+            6. Ensure NextAuth session types are correct
+            7. Add proper error types
+
+            Follow strict mode with zero any usage.
+          claude_args: |
+            --max-turns 12
+            --model claude-opus-4-1-20250805
+
+  create-component:
+    name: Create New Component
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'create-component'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Component Creation
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use shadcn-ui-specialist and react-code-reviewer subagents to:
+
+            1. Get component requirements from latest issue
+            2. Determine atomic level (atom/molecule/organism)
+            3. Use existing ShadCN UI components
+            4. Implement with Server/Client boundaries
+            5. Add TypeScript types (no any)
+            6. Support both en/ar locales
+            7. Include loading and error states
+            8. Apply theme variables
+            9. Add to appropriate directory
+
+            Follow atomic design principles.
+          claude_args: |
+            --max-turns 15
+            --model claude-sonnet-4-20250514
+
+  setup-feature:
+    name: Setup New Feature
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'setup-feature'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Feature Setup
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use architecture-advisor and nextjs-expert subagents to:
+
+            1. Analyze feature requirements from latest issue
+            2. Plan file structure in src/app/[lang]/
+            3. Create route groups if needed
+            4. Setup database schema with Prisma
+            5. Implement auth protection if required
+            6. Add i18n dictionaries
+            7. Create base components
+            8. Setup API routes
+            9. Add validation schemas
+            10. Create initial tests
+
+            Provide complete feature scaffold.
+          claude_args: |
+            --max-turns 20
+            --model claude-opus-4-1-20250805
+
+  accessibility-audit:
+    name: Fix Accessibility Issues
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'fix-accessibility'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Accessibility Fixes
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Perform accessibility audit and fixes:
+
+            1. Check semantic HTML usage
+            2. Verify ARIA labels and roles
+            3. Test keyboard navigation
+            4. Check color contrast (OKLCH)
+            5. Verify screen reader compatibility
+            6. Test RTL support for Arabic
+            7. Check form accessibility
+            8. Verify error messaging
+            9. Test with Radix UI components
+
+            Fix all accessibility issues found.
+          claude_args: |
+            --max-turns 12
+            --model claude-sonnet-4-20250514
+
+  i18n-support:
+    name: Add i18n Support
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'add-i18n-support'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add Internationalization
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Add comprehensive i18n support:
+
+            1. Scan for hardcoded English text
+            2. Add to dictionaries (en.json, ar.json)
+            3. Implement getDictionary() calls
+            4. Add RTL support for Arabic
+            5. Update components with translations
+            6. Test both locales thoroughly
+            7. Update route structure if needed
+            8. Add language switcher if missing
+
+            Ensure all user-facing text is translatable.
+          claude_args: |
+            --max-turns 15
+            --model claude-sonnet-4-20250514

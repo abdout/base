@@ -5,8 +5,8 @@
  * and provides tools for validating translation completeness.
  */
 
-import { getDictionary } from '@/components/internationalization/dictionaries'
-import type { Locale } from '@/components/internationalization/config'
+import { getDictionary } from '@/components/local/dictionaries'
+import type { Locale } from '@/components/local/config'
 
 // Common English words that might indicate untranslated content
 const ENGLISH_INDICATORS = [

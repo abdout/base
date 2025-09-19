@@ -13,7 +13,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface MobileNavProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

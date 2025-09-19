@@ -1,7 +1,7 @@
 import Hero from './hero';
 import RootTabs from './tabs';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/config';
+import type { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/config';
 import {CardsDemo} from "@/components/template/cards";
 
 interface RootContentProps {

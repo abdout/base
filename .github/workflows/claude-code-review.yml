@@ -1,0 +1,138 @@
+name: Automated Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'components/**'
+      - '*.ts'
+      - '*.tsx'
+      - '*.js'
+      - '*.jsx'
+
+jobs:
+  typescript-review:
+    name: TypeScript & Type Safety Review
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TypeScript Pro Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the typescript-pro subagent to review this PR for:
+            - Type safety violations and any usage
+            - Prisma type generation correctness
+            - NextAuth v5 type patterns
+            - Server/Client component type boundaries
+            - Performance implications of type patterns
+
+            Focus on the changes in this PR and provide actionable feedback.
+          claude_args: |
+            --max-turns 10
+            --model claude-opus-4-1-20250805
+
+  react-component-review:
+    name: React & Component Architecture Review
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft == false &&
+      (contains(github.event.pull_request.title, 'component') ||
+       contains(github.event.pull_request.title, 'ui') ||
+       contains(github.event.pull_request.title, 'frontend'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: React Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the react-code-reviewer subagent to analyze:
+            - React 19 best practices and hooks usage
+            - Server vs Client component boundaries
+            - Atomic design pattern compliance
+            - Performance optimizations
+            - Accessibility and i18n (RTL support)
+            - Proper error boundaries and Suspense
+
+            Review the changed components thoroughly.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514
+
+  architecture-review:
+    name: Architecture & Structure Review
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft == false &&
+      (contains(github.event.pull_request.title, 'feat') ||
+       contains(github.event.pull_request.title, 'refactor'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Architecture Advisor Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the architecture-advisor subagent to evaluate:
+            - Compliance with App Router structure
+            - Proper file placement in src/app/[lang]/ structure
+            - Runtime strategy decisions (Node.js vs Edge)
+            - Atomic design pattern adherence
+            - Component reusability and modularity
+            - I18n and auth integration patterns
+
+            Ensure the changes follow our architectural principles.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514
+
+  security-auth-review:
+    name: Security & Authentication Review
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft == false &&
+      (contains(github.event.pull_request.title, 'auth') ||
+       contains(github.event.pull_request.title, 'security') ||
+       contains(github.event.pull_request.title, 'api'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Security & Auth Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Perform a comprehensive security review focusing on:
+            - NextAuth v5 implementation patterns
+            - Protected route implementation
+            - Environment variable handling
+            - API route security
+            - SQL injection prevention with Prisma
+            - XSS prevention in React components
+            - CORS and CSP headers
+            - Authentication flow correctness
+
+            Flag any security vulnerabilities or concerns.
+          claude_args: |
+            --max-turns 12
+            --model claude-opus-4-1-20250805

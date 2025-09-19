@@ -1,6 +1,6 @@
 "use client"
 
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 import {
   Avatar,
   AvatarFallback,

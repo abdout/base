@@ -1,5 +1,5 @@
-import { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/config';
+import { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/config';
 import { ChatbotContent } from './content';
 import type { ChatbotProps } from './type';
 

@@ -1,0 +1,196 @@
+name: PR Automation with Subagents
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to process'
+        required: true
+        type: number
+
+jobs:
+  comprehensive-pr-analysis:
+    name: Comprehensive PR Analysis
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Multi-Agent PR Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Perform a comprehensive PR review using multiple specialized subagents:
+
+            ## 1. Architecture Review (architecture-advisor)
+            - Verify file placement and structure
+            - Check runtime strategy decisions
+            - Validate component organization
+
+            ## 2. TypeScript Analysis (typescript-pro)
+            - Check for type safety violations
+            - Review Prisma and NextAuth types
+            - Verify zero any usage policy
+
+            ## 3. React Best Practices (react-code-reviewer)
+            - Analyze React 19 patterns
+            - Check Server/Client boundaries
+            - Review hooks and state management
+
+            ## 4. UI/UX Compliance (shadcn-ui-specialist)
+            - Verify ShadCN component usage
+            - Check theme variable usage
+            - Validate RTL support
+
+            ## 5. Bug Risk Assessment (bug-detective)
+            - Identify potential bugs
+            - Flag error-prone patterns
+            - Suggest defensive coding
+
+            Provide a comprehensive report with severity levels.
+          claude_args: |
+            --max-turns 15
+            --model claude-opus-4-1-20250805
+
+  auto-fix-linting:
+    name: Auto-fix Linting Issues
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Auto-fix Issues
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Check for and automatically fix:
+
+            1. ESLint violations
+            2. Prettier formatting issues
+            3. Import organization
+            4. Unused imports
+            5. Console.log statements
+            6. Missing TypeScript types
+            7. Missing runtime exports for Prisma pages
+
+            If fixes are needed, commit them directly to the PR branch.
+            Use the typescript-pro subagent for type fixes.
+          claude_args: |
+            --max-turns 10
+            --model claude-sonnet-4-20250514
+
+  test-generation:
+    name: Generate Missing Tests
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      (contains(github.event.pull_request.title, 'feat') ||
+       contains(github.event.pull_request.title, 'fix'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate Tests
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the unit-test-writer subagent to:
+
+            1. Identify new/modified functions without tests
+            2. Generate comprehensive unit tests
+            3. Include edge cases and error scenarios
+            4. Mock Prisma, NextAuth, and external dependencies
+            5. Test both English and Arabic locales
+            6. Add tests for Server and Client components
+
+            Create test files following the project's test patterns.
+            Commit the tests to the PR if any are generated.
+          claude_args: |
+            --max-turns 12
+            --model claude-sonnet-4-20250514
+
+  documentation-update:
+    name: Update Documentation
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.title, 'feat')
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Update Docs
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Review the PR and update documentation if needed:
+
+            1. Check if new features need documentation
+            2. Update relevant MDX files in src/app/[lang]/docs/
+            3. Add code examples if applicable
+            4. Update API documentation
+            5. Add to changelog if significant
+
+            Only update docs if truly necessary for the changes.
+            Follow the existing documentation structure.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514
+
+  performance-impact:
+    name: Performance Impact Analysis
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false &&
+      (contains(github.event.pull_request.files, 'package.json') ||
+       contains(github.event.pull_request.title, 'perf') ||
+       contains(github.event.pull_request.title, 'optimize'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Performance Analysis
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Analyze performance impact:
+
+            1. Check bundle size changes
+            2. Review new dependencies
+            3. Analyze render performance implications
+            4. Check for N+1 queries with Prisma
+            5. Review image optimization
+            6. Check code splitting effectiveness
+            7. Analyze runtime choice impact (Edge vs Node.js)
+
+            Use the nextjs-expert subagent for Next.js specific optimizations.
+            Flag any performance regressions.
+          claude_args: |
+            --max-turns 8
+            --model claude-sonnet-4-20250514

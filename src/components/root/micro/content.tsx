@@ -1,8 +1,8 @@
 import Hero from './hero';
 import MicroTabs from './tabs';
 import MicrosPage from './all';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/config';
+import type { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/config';
 
 interface MicroContentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>;

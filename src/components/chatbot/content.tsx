@@ -6,7 +6,7 @@ import { ChatButton } from './chat-button';
 import { ChatWindow } from './chat-window';
 import { DEFAULT_CONFIG, DEFAULT_DICTIONARY } from './constant';
 import type { ChatbotProps, ChatbotDictionary } from './type';
-import { useLocale } from '@/components/internationalization/use-locale';
+import { useLocale } from '@/components/local/use-locale';
 
 interface ChatbotContentProps extends ChatbotProps {
   dictionary?: Partial<ChatbotDictionary>;

@@ -171,7 +171,7 @@ export default function Component() {
 
 ### Internationalized Route
 ```tsx
-import { getDictionary } from "@/components/internationalization/dictionaries";
+import { getDictionary } from "@/components/local/dictionaries";
 
 export default async function Page({ params }: { params: { lang: string } }) {
   const dict = await getDictionary(params.lang);

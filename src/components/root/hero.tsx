@@ -1,8 +1,8 @@
 import { PageHeader } from '@/components/atom/page-header';
 import { Announcement } from '@/components/atom/announcement';
 import { TwoButtons } from '@/components/atom/two-buttons';
-import type { getDictionary } from '@/components/internationalization/dictionaries';
-import type { Locale } from '@/components/internationalization/config';
+import type { getDictionary } from '@/components/local/dictionaries';
+import type { Locale } from '@/components/local/config';
 
 interface HeroProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>;

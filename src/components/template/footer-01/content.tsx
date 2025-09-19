@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site"
-import type { getDictionary } from "@/components/internationalization/dictionaries"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 interface SiteFooterProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>

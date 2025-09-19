@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { fontSans, fontMono, fontRubik } from "@/components/atom/fonts";
-import { getDictionary } from "@/components/internationalization/dictionaries";
-import { type Locale, localeConfig } from "@/components/internationalization/config";
+import { getDictionary } from "@/components/local/dictionaries";
+import { type Locale, localeConfig } from "@/components/local/config";
 import { ThemeProvider } from "@/components/atom/theme-provider"
 
 export async function generateMetadata({

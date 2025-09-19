@@ -5,8 +5,8 @@ import {
   DEFAULT_LOGIN_REDIRECT,
   publicRoutes
 } from "./routes"
-import { localizationMiddleware } from './components/internationalization/middleware'
-import { i18n } from './components/internationalization/config'
+import { localizationMiddleware } from '@/components/local/middleware'
+import { i18n } from '@/components/local/config'
 
 // Middleware using Next.js 14/15 syntax
 export default auth((req) => {
@@ -68,7 +68,7 @@ export default auth((req) => {
       const redirectUrl = currentLocale
         ? `/${currentLocale}${DEFAULT_LOGIN_REDIRECT}`
         : DEFAULT_LOGIN_REDIRECT
-      return Response.redirect(new URL(redirectUrl, nextUrl))
+      return Response.redirect(new URL(redirectUrl, req.url))
     }
     console.log("✅ [Middleware] Auth route accessible (not logged in)");
     return
@@ -82,7 +82,7 @@ export default auth((req) => {
       ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
       : `/login?callbackUrl=${encodedCallbackUrl}`
 
-    return Response.redirect(new URL(loginUrl, nextUrl))
+    return Response.redirect(new URL(loginUrl, req.url))
   }
 
   if (!isLoggedIn && !isPublicRoute) {
@@ -92,7 +92,7 @@ export default auth((req) => {
       ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
       : `/login?callbackUrl=${encodedCallbackUrl}`
 
-    return Response.redirect(new URL(loginUrl, nextUrl))
+    return Response.redirect(new URL(loginUrl, req.url))
   }
 
   return

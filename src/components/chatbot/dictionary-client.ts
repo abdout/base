@@ -8,7 +8,7 @@ export async function getClientDictionary(locale: 'en' | 'ar') {
   } catch (error) {
     console.error(`Failed to load dictionary for locale: ${locale}`, error);
     // Fallback to English
-    const dictionary = await import('@/components/internationalization/en.json');
+    const dictionary = await import('@/components/local/en.json');
     return dictionary.default;
   }
 }
