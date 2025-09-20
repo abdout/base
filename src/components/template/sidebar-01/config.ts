@@ -92,8 +92,8 @@ export const docsConfig: DocsConfig = {
         //   items: [],
         // },
         {
-          title: "Awesome shadcn",
-          href: "/docs/awesome-shadcn",
+          title: "Awesome registry",
+          href: "/docs/awesome-registry",
           items: [],
         },
         {

@@ -33,8 +33,8 @@ pnpm add ai @ai-sdk/groq lucide-react clsx tailwind-merge
 pnpm add @formatjs/intl-localematcher negotiator
 pnpm add -D @types/negotiator
 
-# UI Components (shadcn/ui)
-npx shadcn@latest add button scroll-area avatar
+# UI Components (registry/ui)
+npx registry@latest add button scroll-area avatar
 ```
 
 ### 3. Add Robot Image

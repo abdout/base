@@ -41,7 +41,7 @@ export function LowLevelBlockDiagram() {
   const sections: Section[] = [
     {
       title: "UI",
-      items: ["Theme", "shadcn", "Blocks"],
+      items: ["Theme", "registry", "Blocks"],
     },
     {
       title: "Apps",
@@ -89,7 +89,7 @@ export function LowLevelBlockDiagram() {
     },
     {
       title: "Patterns",
-      items: ["shadcn", "ESLint", "pnpm", "CI"],
+      items: ["registry", "ESLint", "pnpm", "CI"],
     },
     {
       title: "Community",

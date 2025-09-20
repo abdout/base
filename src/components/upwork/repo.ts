@@ -54,7 +54,7 @@ export const DEFAULT_REPOSITORIES: RepositoryInventory = {
       name: 'Component Library',
       status: 'active',
       points: 9,
-      tech: ['shadcn/ui', 'Components', 'UI/UX', 'Design System'],
+      tech: ['registry/ui', 'Components', 'UI/UX', 'Design System'],
       description: 'Atomic design component library with playground',
       liveUrl: 'https://codebase-url.com',
       repoUrl: 'https://github.com/abdout/codebase',

@@ -11,7 +11,7 @@ import { PasteImport } from "@/components/leads/paste-import"
 // Remove server-only dictionary import - will be passed as prop
 import { toast } from "sonner"
 import { createLead } from "@/components/leads/clients/actions"
-import { extractLeadData } from "@/lib/text-extraction"
+import { extractLeadFromText } from "@/lib/text-extraction"
 import {
   ChevronDown,
   ChevronUp,
@@ -59,8 +59,8 @@ export default function LeadsClient({ lang, dictionary }: LeadsClientProps) {
 
       for (const entry of entries) {
         try {
-          // Extract lead data using AI
-          const extractedData = await extractLeadData(entry)
+          // Extract lead data
+          const extractedData = extractLeadFromText(entry)
 
           if (!extractedData.name && !extractedData.email && !extractedData.company) {
             failedCount++

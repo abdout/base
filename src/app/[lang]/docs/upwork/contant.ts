@@ -7,7 +7,7 @@ export const appsData = [
   },
   {
     name: "Codebase",
-    description: "Component library platform featuring shadcn/ui components, atomic templates, dashboard blocks, authentication forms, payment methods, calendar widgets, navigation patterns, card layouts, and interactive playground sections.",
+    description: "Component library platform featuring registry/ui components, atomic templates, dashboard blocks, authentication forms, payment methods, calendar widgets, navigation patterns, card layouts, and interactive playground sections.",
     repositoryUrl: "https://github.com/abdout/codebase",
     previewUrl: "https://cb.databayt.org"
   },
