@@ -96,6 +96,3 @@ export const {
   useSecureCookies: process.env.NODE_ENV === "production",
   trustHost: true,
 })
-
-// Export handlers for API routes
-export { GET, POST }
