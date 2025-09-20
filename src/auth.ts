@@ -60,18 +60,89 @@ export const {
     error: "/error",
   },
   events: {
-    async linkAccount({ user }) {
-      await db.user.update({
-        where: { id: user.id },
-        data: { emailVerified: new Date() }
-      })
+    async linkAccount({ user, account, profile }) {
+      console.log("🔗 [LinkAccount] Account linking event triggered")
+      console.log("🔗 [LinkAccount] User ID:", user.id)
+      console.log("🔗 [LinkAccount] Provider:", account.provider)
+
+      // Only update email verification for new users
+      // The signIn callback handles existing users
+      const existingUser = await db.user.findUnique({
+        where: { id: user.id }
+      });
+
+      if (existingUser && !existingUser.emailVerified) {
+        await db.user.update({
+          where: { id: user.id },
+          data: { emailVerified: new Date() }
+        })
+        console.log("✅ [LinkAccount] Email verified for user")
+      }
     }
   },
   callbacks: {
-    async signIn({ user, account }) {
-      // Allow OAuth without email verification
-      if (account?.provider !== "credentials") return true;
+    async signIn({ user, account, profile }) {
+      console.log("🔐 [SignIn] Starting sign-in process")
+      console.log("🔐 [SignIn] Provider:", account?.provider)
+      console.log("🔐 [SignIn] Email:", user.email)
 
+      // For OAuth providers (Google, Facebook, etc.)
+      if (account?.provider !== "credentials") {
+        // Check if a user with this email already exists
+        if (user.email) {
+          const existingUser = await db.user.findUnique({
+            where: { email: user.email }
+          });
+
+          if (existingUser) {
+            console.log("🔐 [SignIn] User with email already exists, checking for account link")
+
+            // Check if this OAuth account is already linked
+            const existingAccount = await db.account.findUnique({
+              where: {
+                provider_providerAccountId: {
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                }
+              }
+            });
+
+            if (!existingAccount) {
+              console.log("🔐 [SignIn] Linking new OAuth account to existing user")
+              // Link the OAuth account to the existing user
+              await db.account.create({
+                data: {
+                  userId: existingUser.id,
+                  type: account.type,
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                  refresh_token: account.refresh_token,
+                  access_token: account.access_token,
+                  expires_at: account.expires_at,
+                  token_type: account.token_type,
+                  scope: account.scope,
+                  id_token: account.id_token,
+                  session_state: account.session_state,
+                }
+              });
+            }
+
+            // Update the user's email verification status if needed
+            if (!existingUser.emailVerified) {
+              await db.user.update({
+                where: { id: existingUser.id },
+                data: { emailVerified: new Date() }
+              });
+            }
+
+            console.log("✅ [SignIn] OAuth account linked successfully")
+          }
+        }
+
+        return true;
+      }
+
+      // For credentials provider
       const existingUser = await getUserById(user.id);
 
       // Prevent sign in without email verification
