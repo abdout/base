@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { LeadsContent } from "@/components/leads/clients/content"
 import { PasteImport } from "@/components/leads/paste-import"
-import { getDictionary } from "@/components/local/dictionaries"
+// Remove server-only dictionary import - will be passed as prop
 import { toast } from "sonner"
 import { createLead } from "@/components/leads/clients/actions"
 import { extractLeadData } from "@/lib/text-extraction"
@@ -34,20 +34,15 @@ const SUGGESTIONS = [
 
 interface LeadsClientProps {
   lang: string
+  dictionary: any
 }
 
-export default function LeadsClient({ lang }: LeadsClientProps) {
+export default function LeadsClient({ lang, dictionary }: LeadsClientProps) {
   const [showTable, setShowTable] = useState(false)
   const [input, setInput] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
   const [isImporting, setIsImporting] = useState(false)
-  const [dictionary, setDictionary] = useState<any>(null)
   const router = useRouter()
-
-  // Load dictionary on mount
-  useState(() => {
-    getDictionary(lang).then(setDictionary)
-  })
 
   const handleImport = async () => {
     if (!input.trim()) {
@@ -128,14 +123,6 @@ export default function LeadsClient({ lang }: LeadsClientProps) {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       handleImport()
     }
-  }
-
-  if (!dictionary) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
-    )
   }
 
   return (

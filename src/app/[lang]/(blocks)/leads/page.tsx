@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 import { Metadata } from "next";
 import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/components/local/dictionaries";
 import LeadsClient from "./leads-client";
 
 export const metadata: Metadata = {
@@ -21,5 +22,7 @@ export default async function LeadsPage({
     redirect(`/${params.lang}/login`);
   }
 
-  return <LeadsClient lang={params.lang} />;
+  const dictionary = await getDictionary(params.lang);
+
+  return <LeadsClient lang={params.lang} dictionary={dictionary} />;
 }

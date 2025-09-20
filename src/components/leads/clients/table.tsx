@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { CustomDataTable } from "./custom-data-table";
 import { DataTableAdvancedToolbar } from "@/components/table/data-table/data-table-advanced-toolbar";
-import { DataTableFilterbar } from "@/components/table/data-table/data-table-filterbar";
+import { DataTableToolbar } from "@/components/table/data-table/data-table-toolbar";
 import { Button } from "@/components/ui/button";
 import { Plus, Upload, Download } from "lucide-react";
 import { useModal } from "@/components/atom/modal/context";
@@ -266,7 +266,7 @@ export function LeadsTable({ data, pagination, dictionary }: LeadsTableProps) {
             </Button>
           </div>
         </DataTableAdvancedToolbar>
-        <DataTableFilterbar table={table} filters={filters} />
+        <DataTableToolbar table={table} />
       </CustomDataTable>
 
       {/* Floating bar for bulk actions */}

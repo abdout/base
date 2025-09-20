@@ -386,4 +386,4 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
   );
 }
 
-export { PasteImport };
+export const PasteImport = PasteImportInterface;
