@@ -1,44 +1,101 @@
-// Lightweight auth for Edge Runtime (middleware)
-// This avoids importing Prisma and bcryptjs which are not Edge-compatible
-
 import NextAuth from "next-auth"
-import type { NextAuthConfig } from "next-auth"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { getUserById } from "@/components/auth/user"
+import { getTwoFactorConfirmationByUserId } from "@/components/auth/two-factor-confirmation"
+import { getAccountByUserId } from "@/components/auth/account"
+import { db } from "@/lib/db"
+import authConfig from "@/auth.config"
 
-// Basic config without database or bcrypt dependencies
-const authConfig: NextAuthConfig = {
-  providers: [], // Providers will be handled by the main auth.ts
+// Force Node.js runtime for auth operations
+export const runtime = 'nodejs'
+
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+  update,
+} = NextAuth({
   pages: {
     signIn: "/login",
     error: "/error",
   },
-  // Ensure secure and predictable URL handling
-  useSecureCookies: process.env.NODE_ENV === "production",
-  trustHost: true, // Allow flexible host handling in Edge Runtime
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() }
+      })
+    }
+  },
   callbacks: {
-    // Remove the authorized callback - handle authorization in middleware directly
-    // The authorized callback can cause URL construction issues in Edge Runtime
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
-        token.role = user.role
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      if (account?.provider !== "credentials") return true;
+
+      const existingUser = await getUserById(user.id);
+
+      // Prevent sign in without email verification
+      if (!existingUser?.emailVerified) return false;
+
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
+
+        if (!twoFactorConfirmation) return false;
+
+        // Delete two factor confirmation for next sign in
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id }
+        });
       }
-      return token
+
+      return true;
     },
-    session({ token, session }) {
+    async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = token.sub
+        session.user.id = token.sub;
       }
 
       if (token.role && session.user) {
-        session.user.role = token.role as string
+        session.user.role = token.role as "ADMIN" | "USER";
       }
 
-      return session
-    },
-  },
-  session: {
-    strategy: "jwt"
-  },
-}
+      if (session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.isOAuth = token.isOAuth as boolean;
+      }
 
-export const { auth, signIn, signOut } = NextAuth(authConfig)
+      return session;
+    },
+    async jwt({ token }) {
+      if (!token.sub) return token;
+
+      const existingUser = await getUserById(token.sub);
+
+      if (!existingUser) return token;
+
+      const existingAccount = await getAccountByUserId(
+        existingUser.id
+      );
+
+      token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.role = existingUser.role;
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+
+      return token;
+    }
+  },
+  adapter: PrismaAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
+  // Ensure secure cookies and proper URL handling
+  useSecureCookies: process.env.NODE_ENV === "production",
+  trustHost: true,
+})
+
+// Export handlers for API routes
+export { GET, POST }
