@@ -11,24 +11,42 @@ export const runtime = 'nodejs'
 
 // Helper to ensure we have a valid URL
 function getBaseUrl() {
+  console.log("🔧 [Auth] === Getting Base URL ===")
+  console.log("🔧 [Auth] Environment variables:")
+  console.log("  - NEXTAUTH_URL:", process.env.NEXTAUTH_URL)
+  console.log("  - VERCEL_URL:", process.env.VERCEL_URL)
+  console.log("  - NODE_ENV:", process.env.NODE_ENV)
+
   // In production, use NEXTAUTH_URL if set
   if (process.env.NEXTAUTH_URL) {
-    // Ensure it has a protocol
     const url = process.env.NEXTAUTH_URL
+    console.log("🔧 [Auth] Using NEXTAUTH_URL:", url)
+
+    // Ensure it has a protocol
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      return `https://${url}`
+      const fullUrl = `https://${url}`
+      console.log("🔧 [Auth] Added https:// protocol:", fullUrl)
+      return fullUrl
     }
     return url
   }
 
   // Fallback for development
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
+    const vercelUrl = `https://${process.env.VERCEL_URL}`
+    console.log("🔧 [Auth] Using VERCEL_URL:", vercelUrl)
+    return vercelUrl
   }
 
   // Default fallback
-  return 'https://localhost:3000'
+  const fallbackUrl = 'https://localhost:3000'
+  console.log("🔧 [Auth] Using fallback URL:", fallbackUrl)
+  return fallbackUrl
 }
+
+// Get and validate the base URL at initialization
+const baseUrl = getBaseUrl()
+console.log("✅ [Auth] NextAuth initialized with base URL:", baseUrl)
 
 export const {
   handlers: { GET, POST },
