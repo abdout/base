@@ -13,33 +13,43 @@ function createSafeURL(path: string, base: string): URL {
   try {
     // Ensure path starts with /
     const safePath = path.startsWith('/') ? path : `/${path}`
-    const url = new URL(safePath, base)
-    console.log(`✅ [SafeURL] Created: ${url.href}`)
-    return url
+    return new URL(safePath, base)
   } catch (error) {
     console.error(`🚨 [SafeURL] Failed to create URL with path="${path}" base="${base}":`, error)
     // Fallback to a safe URL
-    const fallbackUrl = new URL('/', 'https://localhost:3000')
-    console.log(`🔄 [SafeURL] Using fallback: ${fallbackUrl.href}`)
-    return fallbackUrl
+    return new URL('/', 'https://localhost:3000')
   }
 }
 
 // Manual JWT verification for Edge Runtime
 async function verifyAuth(request: NextRequest): Promise<boolean> {
   try {
-    const sessionToken = request.cookies.get('next-auth.session-token')?.value ||
-                        request.cookies.get('__Secure-next-auth.session-token')?.value
+    // NextAuth v5 uses different cookie names
+    // Check multiple possible cookie names
+    const cookieNames = [
+      'authjs.session-token',           // NextAuth v5 default
+      '__Secure-authjs.session-token',  // NextAuth v5 with secure
+      'next-auth.session-token',        // NextAuth v4 fallback
+      '__Secure-next-auth.session-token', // NextAuth v4 secure fallback
+    ]
+
+    let sessionToken: string | undefined
+
+    for (const cookieName of cookieNames) {
+      const token = request.cookies.get(cookieName)?.value
+      if (token) {
+        sessionToken = token
+        break
+      }
+    }
 
     if (!sessionToken) {
-      console.log("🔐 [Auth] No session token found")
       return false
     }
 
-    // Use a simple approach - if token exists and isn't obviously invalid, consider authenticated
-    // For production, you'd want to properly verify the JWT with your secret
-    if (sessionToken && sessionToken.length > 10) {
-      console.log("🔐 [Auth] Valid session token found")
+    // Basic validation - check if token exists and has reasonable length
+    // JWT tokens are typically 100+ characters
+    if (sessionToken && sessionToken.length > 50) {
       return true
     }
 
@@ -52,9 +62,9 @@ async function verifyAuth(request: NextRequest): Promise<boolean> {
 
 // Manual middleware without NextAuth wrapper
 export default async function middleware(request: NextRequest) {
-  console.log("🔧 [ManualMiddleware] === DEBUG START ===")
-  console.log("🔧 [ManualMiddleware] Request URL:", request.url)
-  console.log("🔧 [ManualMiddleware] Request pathname:", request.nextUrl.pathname)
+  // Skip logging for asset requests
+  const pathname = request.nextUrl.pathname
+  const isAsset = pathname.includes('_next') || pathname.includes('favicon')
 
   try {
     const { nextUrl } = request
@@ -80,8 +90,6 @@ export default async function middleware(request: NextRequest) {
       baseUrl = 'https://localhost:3000'
     }
 
-    console.log("🔧 [ManualMiddleware] Constructed baseUrl:", baseUrl)
-
     let pathname = nextUrl.pathname
 
     // Extract locale from pathname if present
@@ -89,24 +97,14 @@ export default async function middleware(request: NextRequest) {
       pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     )
 
-    console.log("🔧 [ManualMiddleware] Original pathname:", pathname)
-    console.log("🔧 [ManualMiddleware] Detected currentLocale:", currentLocale)
-
     // Remove locale from pathname for route checking
     if (currentLocale) {
       pathname = pathname.replace(`/${currentLocale}`, '') || '/'
     }
 
-    console.log("🔧 [ManualMiddleware] Processed pathname:", pathname)
-
     const isApiAuthRoute = pathname.startsWith(apiAuthPrefix)
     const isPublicRoute = publicRoutes.includes(pathname)
     const isAuthRoute = authRoutes.includes(pathname)
-
-    console.log("🔧 [ManualMiddleware] Route checks:")
-    console.log("  - isApiAuthRoute:", isApiAuthRoute)
-    console.log("  - isPublicRoute:", isPublicRoute)
-    console.log("  - isAuthRoute:", isAuthRoute)
 
     // Check if the route is in the platform directory
     const isPlatformRoute =
@@ -123,35 +121,25 @@ export default async function middleware(request: NextRequest) {
       pathname === "/resource" ||
       pathname.startsWith("/resource/");
 
-    console.log("🔧 [ManualMiddleware] isPlatformRoute:", isPlatformRoute)
-
     // Skip middleware for API routes
     if (isApiAuthRoute) {
-      console.log("🔧 [ManualMiddleware] Skipping API auth route")
       return NextResponse.next()
     }
 
     // Handle locale detection/redirection first (only if not an API route)
     if (!currentLocale && !isApiAuthRoute) {
-      console.log("🔧 [ManualMiddleware] No locale detected, calling localizationMiddleware")
       return localizationMiddleware(request)
     }
 
     // Verify authentication manually
     const isLoggedIn = await verifyAuth(request)
-    console.log("🔧 [ManualMiddleware] isLoggedIn:", isLoggedIn)
 
     if (isAuthRoute) {
-      console.log("🔧 [ManualMiddleware] Processing auth route")
       if (isLoggedIn) {
         const redirectUrl = currentLocale
           ? `/${currentLocale}${DEFAULT_LOGIN_REDIRECT}`
           : DEFAULT_LOGIN_REDIRECT
-        console.log("🔧 [ManualMiddleware] Auth redirect URL:", redirectUrl)
-        console.log("🔧 [ManualMiddleware] Base URL for redirect:", baseUrl)
-
         const fullRedirectUrl = createSafeURL(redirectUrl, baseUrl)
-        console.log("🔧 [ManualMiddleware] Full redirect URL constructed:", fullRedirectUrl.href)
         return NextResponse.redirect(fullRedirectUrl)
       }
       return NextResponse.next()
@@ -159,50 +147,32 @@ export default async function middleware(request: NextRequest) {
 
     // Explicitly protect platform routes
     if (isPlatformRoute && !isLoggedIn) {
-      console.log("🔧 [ManualMiddleware] Platform route requires auth, redirecting to login")
       const callbackUrl = request.nextUrl.pathname + nextUrl.search
       const encodedCallbackUrl = encodeURIComponent(callbackUrl)
       const loginUrl = currentLocale
         ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
         : `/login?callbackUrl=${encodedCallbackUrl}`
 
-      console.log("🔧 [ManualMiddleware] Platform redirect - callbackUrl:", callbackUrl)
-      console.log("🔧 [ManualMiddleware] Platform redirect - loginUrl:", loginUrl)
-      console.log("🔧 [ManualMiddleware] Platform redirect - baseUrl:", baseUrl)
-
       const fullLoginUrl = createSafeURL(loginUrl, baseUrl)
-      console.log("🔧 [ManualMiddleware] Platform redirect - Full URL constructed:", fullLoginUrl.href)
       return NextResponse.redirect(fullLoginUrl)
     }
 
     if (!isLoggedIn && !isPublicRoute) {
-      console.log("🔧 [ManualMiddleware] Non-public route requires auth, redirecting to login")
       const callbackUrl = request.nextUrl.pathname + nextUrl.search
       const encodedCallbackUrl = encodeURIComponent(callbackUrl)
       const loginUrl = currentLocale
         ? `/${currentLocale}/login?callbackUrl=${encodedCallbackUrl}`
         : `/login?callbackUrl=${encodedCallbackUrl}`
 
-      console.log("🔧 [ManualMiddleware] General redirect - callbackUrl:", callbackUrl)
-      console.log("🔧 [ManualMiddleware] General redirect - loginUrl:", loginUrl)
-      console.log("🔧 [ManualMiddleware] General redirect - baseUrl:", baseUrl)
-
       const fullLoginUrl = createSafeURL(loginUrl, baseUrl)
-      console.log("🔧 [ManualMiddleware] General redirect - Full URL constructed:", fullLoginUrl.href)
       return NextResponse.redirect(fullLoginUrl)
     }
 
-    console.log("🔧 [ManualMiddleware] No action needed, continuing")
-    console.log("🔧 [ManualMiddleware] === DEBUG END ===")
     return NextResponse.next()
 
   } catch (error) {
-    console.error("🚨 [ManualMiddleware] CRITICAL ERROR in middleware:", error)
-    console.error("🚨 [ManualMiddleware] Request URL:", request.url)
-    console.error("🚨 [ManualMiddleware] Request headers:", Object.fromEntries(request.headers.entries()))
-
+    console.error("🚨 [Middleware] Error:", error)
     // Return a safe response to prevent crashes
-    console.log("🔄 [ManualMiddleware] Returning safe fallback response")
     return NextResponse.next()
   }
 }
