@@ -18,13 +18,8 @@ export default auth((req) => {
   const host = req.headers?.get('host') || req.headers?.get('x-forwarded-host')
   const baseUrl = host ? `${protocol}://${host}` : nextUrl.origin
 
-  console.log("🌐 [Middleware] Request:", {
-    path: nextUrl.pathname,
-    isLoggedIn,
-    authExists: !!req.auth,
-    userId: req.auth?.user?.id,
-    baseUrl
-  })
+  // Debug logging disabled in production
+  // console.log("🌐 [Middleware] Request:", nextUrl.pathname)
 
   let pathname = nextUrl.pathname
 
@@ -59,7 +54,6 @@ export default auth((req) => {
 
   // Skip middleware for API routes
   if (isApiAuthRoute) {
-    console.log("🔄 [Middleware] API auth route, skipping");
     return
   }
 
@@ -70,13 +64,11 @@ export default auth((req) => {
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      console.log("🔃 [Middleware] Already logged in, redirecting from auth route");
       const redirectUrl = currentLocale
         ? `/${currentLocale}${DEFAULT_LOGIN_REDIRECT}`
         : DEFAULT_LOGIN_REDIRECT
       return Response.redirect(new URL(redirectUrl, baseUrl))
     }
-    console.log("✅ [Middleware] Auth route accessible (not logged in)");
     return
   }
 
@@ -104,8 +96,8 @@ export default auth((req) => {
   return
 })
 
-// Force Node.js runtime for middleware (required for Prisma and bcryptjs)
-export const runtime = 'nodejs'
+// Middleware must run in Edge Runtime
+// Note: Authentication checks work in Edge Runtime via NextAuth
 
 export const config = {
   matcher: ['/((?!api|_next|_static|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)'],
