@@ -11,11 +11,12 @@ const authConfig: NextAuthConfig = {
     signIn: "/login",
     error: "/error",
   },
+  // Ensure secure and predictable URL handling
+  useSecureCookies: process.env.NODE_ENV === "production",
+  trustHost: true, // Allow flexible host handling in Edge Runtime
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-      return isLoggedIn
-    },
+    // Remove the authorized callback - handle authorization in middleware directly
+    // The authorized callback can cause URL construction issues in Edge Runtime
     jwt({ token, user }) {
       if (user) {
         token.id = user.id
