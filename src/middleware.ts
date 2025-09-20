@@ -8,15 +8,48 @@ import {
 import { localizationMiddleware } from '@/components/local/middleware'
 import { i18n } from '@/components/local/config'
 
+// Helper function to safely create URLs
+function createSafeURL(path: string, base: string): URL {
+  try {
+    // Ensure path starts with /
+    const safePath = path.startsWith('/') ? path : `/${path}`
+    const url = new URL(safePath, base)
+    console.log(`✅ [SafeURL] Created: ${url.href}`)
+    return url
+  } catch (error) {
+    console.error(`🚨 [SafeURL] Failed to create URL with path="${path}" base="${base}":`, error)
+    // Fallback to a safe URL
+    const fallbackUrl = new URL('/', 'https://localhost:3000')
+    console.log(`🔄 [SafeURL] Using fallback: ${fallbackUrl.href}`)
+    return fallbackUrl
+  }
+}
+
 // Middleware using Next.js 14/15 syntax
 export default auth((req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
-  // Construct proper base URL for redirects
+  // Construct proper base URL for redirects with better fallbacks
   const protocol = req.headers?.get('x-forwarded-proto') || 'https'
-  const host = req.headers?.get('host') || req.headers?.get('x-forwarded-host')
-  const baseUrl = host ? `${protocol}://${host}` : nextUrl.origin
+  const host = req.headers?.get('host') || req.headers?.get('x-forwarded-host') || 'localhost:3000'
+
+  // Ensure we always have a valid baseUrl
+  let baseUrl: string
+  try {
+    if (host && host !== 'localhost:3000') {
+      baseUrl = `${protocol}://${host}`
+    } else if (nextUrl.origin && nextUrl.origin !== 'null') {
+      baseUrl = nextUrl.origin
+    } else {
+      baseUrl = 'https://localhost:3000' // Ultimate fallback
+    }
+    // Validate the baseUrl by creating a URL object
+    new URL('/', baseUrl)
+  } catch (error) {
+    console.error("🚨 [Middleware] Invalid baseUrl detected, using fallback:", error)
+    baseUrl = 'https://localhost:3000'
+  }
 
   // DEBUG: Add comprehensive logging
   console.log("🌐 [Middleware] === DEBUG START ===")
@@ -95,16 +128,9 @@ export default auth((req) => {
       console.log("🌐 [Middleware] Auth redirect URL:", redirectUrl)
       console.log("🌐 [Middleware] Base URL for redirect:", baseUrl)
 
-      try {
-        const fullRedirectUrl = new URL(redirectUrl, baseUrl)
-        console.log("🌐 [Middleware] Full redirect URL constructed:", fullRedirectUrl.href)
-        return Response.redirect(fullRedirectUrl)
-      } catch (error) {
-        console.error("🚨 [Middleware] ERROR creating URL for auth redirect:", error)
-        console.error("🚨 [Middleware] redirectUrl:", redirectUrl)
-        console.error("🚨 [Middleware] baseUrl:", baseUrl)
-        throw error
-      }
+      const fullRedirectUrl = createSafeURL(redirectUrl, baseUrl)
+      console.log("🌐 [Middleware] Full redirect URL constructed:", fullRedirectUrl.href)
+      return Response.redirect(fullRedirectUrl)
     }
     return
   }
@@ -123,16 +149,9 @@ export default auth((req) => {
     console.log("🌐 [Middleware] Platform redirect - loginUrl:", loginUrl)
     console.log("🌐 [Middleware] Platform redirect - baseUrl:", baseUrl)
 
-    try {
-      const fullLoginUrl = new URL(loginUrl, baseUrl)
-      console.log("🌐 [Middleware] Platform redirect - Full URL constructed:", fullLoginUrl.href)
-      return Response.redirect(fullLoginUrl)
-    } catch (error) {
-      console.error("🚨 [Middleware] ERROR creating URL for platform redirect:", error)
-      console.error("🚨 [Middleware] loginUrl:", loginUrl)
-      console.error("🚨 [Middleware] baseUrl:", baseUrl)
-      throw error
-    }
+    const fullLoginUrl = createSafeURL(loginUrl, baseUrl)
+    console.log("🌐 [Middleware] Platform redirect - Full URL constructed:", fullLoginUrl.href)
+    return Response.redirect(fullLoginUrl)
   }
 
   if (!isLoggedIn && !isPublicRoute) {
@@ -148,16 +167,9 @@ export default auth((req) => {
     console.log("🌐 [Middleware] General redirect - loginUrl:", loginUrl)
     console.log("🌐 [Middleware] General redirect - baseUrl:", baseUrl)
 
-    try {
-      const fullLoginUrl = new URL(loginUrl, baseUrl)
-      console.log("🌐 [Middleware] General redirect - Full URL constructed:", fullLoginUrl.href)
-      return Response.redirect(fullLoginUrl)
-    } catch (error) {
-      console.error("🚨 [Middleware] ERROR creating URL for general redirect:", error)
-      console.error("🚨 [Middleware] loginUrl:", loginUrl)
-      console.error("🚨 [Middleware] baseUrl:", baseUrl)
-      throw error
-    }
+    const fullLoginUrl = createSafeURL(loginUrl, baseUrl)
+    console.log("🌐 [Middleware] General redirect - Full URL constructed:", fullLoginUrl.href)
+    return Response.redirect(fullLoginUrl)
   }
 
   console.log("🌐 [Middleware] No action needed, continuing")

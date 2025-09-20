@@ -62,6 +62,13 @@ export function localizationMiddleware(request: NextRequest) {
   console.log("🌍 [LocalizationMiddleware] Full nextUrl after modification:", request.nextUrl.href)
 
   try {
+    // Validate the modified URL before creating redirect
+    const modifiedUrl = request.nextUrl.href
+    console.log("🌍 [LocalizationMiddleware] Attempting to redirect to:", modifiedUrl)
+
+    // Test if the URL is valid
+    new URL(modifiedUrl)
+
     const response = NextResponse.redirect(request.nextUrl);
     console.log("🌍 [LocalizationMiddleware] Redirect response created successfully")
 
@@ -78,6 +85,18 @@ export function localizationMiddleware(request: NextRequest) {
     console.error("🚨 [LocalizationMiddleware] ERROR creating redirect:", error)
     console.error("🚨 [LocalizationMiddleware] request.nextUrl:", request.nextUrl)
     console.error("🚨 [LocalizationMiddleware] request.nextUrl.href:", request.nextUrl.href)
-    throw error
+
+    // Fallback: redirect to home with default locale
+    const fallbackUrl = new URL(`/${locale}/`, request.url)
+    console.log("🔄 [LocalizationMiddleware] Using fallback URL:", fallbackUrl.href)
+    const response = NextResponse.redirect(fallbackUrl);
+
+    response.cookies.set('NEXT_LOCALE', locale, {
+      maxAge: 365 * 24 * 60 * 60, // 1 year
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    return response;
   }
 }
