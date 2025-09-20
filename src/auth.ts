@@ -9,6 +9,27 @@ import authConfig from "@/auth.config"
 // Force Node.js runtime for auth operations
 export const runtime = 'nodejs'
 
+// Helper to ensure we have a valid URL
+function getBaseUrl() {
+  // In production, use NEXTAUTH_URL if set
+  if (process.env.NEXTAUTH_URL) {
+    // Ensure it has a protocol
+    const url = process.env.NEXTAUTH_URL
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      return `https://${url}`
+    }
+    return url
+  }
+
+  // Fallback for development
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
+
+  // Default fallback
+  return 'https://localhost:3000'
+}
+
 export const {
   handlers: { GET, POST },
   auth,
