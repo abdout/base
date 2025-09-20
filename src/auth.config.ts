@@ -51,7 +51,23 @@ export default {
     Facebook({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      authorization: {
+        url: "https://www.facebook.com/v18.0/dialog/oauth",
+        params: {
+          scope: "email public_profile",
+          redirect_uri: process.env.NEXTAUTH_URL ? `${process.env.NEXTAUTH_URL}/api/auth/callback/facebook` : undefined
+        }
+      },
+      token: {
+        url: "https://graph.facebook.com/v18.0/oauth/access_token"
+      },
+      userinfo: {
+        url: "https://graph.facebook.com/me?fields=id,name,email,picture.width(250).height(250)"
+      },
       profile(profile) {
+        console.log("🔵 [Facebook OAuth] === FACEBOOK OAUTH DEBUG ===");
+        console.log("🔵 [Facebook OAuth] NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+        console.log("🔵 [Facebook OAuth] Expected callback:", `${process.env.NEXTAUTH_URL}/api/auth/callback/facebook`);
         console.log("🔵 [Facebook OAuth] Raw profile data:", JSON.stringify(profile, null, 2));
         console.log("🔵 [Facebook OAuth] Client ID:", process.env.FACEBOOK_CLIENT_ID);
         console.log("🔵 [Facebook OAuth] Client Secret exists:", !!process.env.FACEBOOK_CLIENT_SECRET);
