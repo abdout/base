@@ -11,42 +11,38 @@ export const runtime = 'nodejs'
 
 // Helper to ensure we have a valid URL
 function getBaseUrl() {
-  console.log("🔧 [Auth] === Getting Base URL ===")
-  console.log("🔧 [Auth] Environment variables:")
-  console.log("  - NEXTAUTH_URL:", process.env.NEXTAUTH_URL)
-  console.log("  - VERCEL_URL:", process.env.VERCEL_URL)
-  console.log("  - NODE_ENV:", process.env.NODE_ENV)
-
-  // In production, use NEXTAUTH_URL if set
-  if (process.env.NEXTAUTH_URL) {
-    const url = process.env.NEXTAUTH_URL
-    console.log("🔧 [Auth] Using NEXTAUTH_URL:", url)
-
-    // Ensure it has a protocol
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      const fullUrl = `https://${url}`
-      console.log("🔧 [Auth] Added https:// protocol:", fullUrl)
-      return fullUrl
+  try {
+    // In production, use NEXTAUTH_URL if set
+    if (process.env.NEXTAUTH_URL) {
+      const url = process.env.NEXTAUTH_URL
+      // Ensure it has a protocol
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        return `https://${url}`
+      }
+      return url
     }
-    return url
-  }
 
-  // Fallback for development
-  if (process.env.VERCEL_URL) {
-    const vercelUrl = `https://${process.env.VERCEL_URL}`
-    console.log("🔧 [Auth] Using VERCEL_URL:", vercelUrl)
-    return vercelUrl
-  }
+    // Fallback for development
+    if (process.env.VERCEL_URL) {
+      return `https://${process.env.VERCEL_URL}`
+    }
 
-  // Default fallback
-  const fallbackUrl = 'https://localhost:3000'
-  console.log("🔧 [Auth] Using fallback URL:", fallbackUrl)
-  return fallbackUrl
+    // Default fallback
+    return 'https://localhost:3000'
+  } catch (error) {
+    console.error("❌ [Auth] Error in getBaseUrl:", error)
+    return 'https://localhost:3000'
+  }
 }
 
 // Get and validate the base URL at initialization
-const baseUrl = getBaseUrl()
-console.log("✅ [Auth] NextAuth initialized with base URL:", baseUrl)
+let baseUrl: string;
+try {
+  baseUrl = getBaseUrl()
+} catch (error) {
+  console.error("❌ [Auth] Error getting base URL:", error)
+  baseUrl = 'https://localhost:3000'
+}
 
 export const {
   handlers: { GET, POST },
@@ -61,10 +57,6 @@ export const {
   },
   events: {
     async linkAccount({ user, account, profile }) {
-      console.log("🔗 [LinkAccount] Account linking event triggered")
-      console.log("🔗 [LinkAccount] User ID:", user.id)
-      console.log("🔗 [LinkAccount] Provider:", account.provider)
-
       // Only update email verification for new users
       // The signIn callback handles existing users
       const existingUser = await db.user.findUnique({
@@ -76,16 +68,11 @@ export const {
           where: { id: user.id },
           data: { emailVerified: new Date() }
         })
-        console.log("✅ [LinkAccount] Email verified for user")
       }
     }
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("🔐 [SignIn] Starting sign-in process")
-      console.log("🔐 [SignIn] Provider:", account?.provider)
-      console.log("🔐 [SignIn] Email:", user.email)
-
       // For OAuth providers (Google, Facebook, etc.)
       if (account?.provider !== "credentials") {
         // Check if a user with this email already exists
@@ -95,8 +82,6 @@ export const {
           });
 
           if (existingUser) {
-            console.log("🔐 [SignIn] User with email already exists, checking for account link")
-
             // Check if this OAuth account is already linked
             const existingAccount = await db.account.findUnique({
               where: {
@@ -108,7 +93,6 @@ export const {
             });
 
             if (!existingAccount) {
-              console.log("🔐 [SignIn] Linking new OAuth account to existing user")
               // Link the OAuth account to the existing user
               await db.account.create({
                 data: {
@@ -134,8 +118,6 @@ export const {
                 data: { emailVerified: new Date() }
               });
             }
-
-            console.log("✅ [SignIn] OAuth account linked successfully")
           }
         }
 
