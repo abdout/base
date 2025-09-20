@@ -21,11 +21,15 @@ const cleanUrlHash = () => {
   }
 };
 
-export const Social = () => {
+interface SocialProps {
+  dictionary?: any;
+}
+
+export const Social = ({ dictionary }: SocialProps) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const router = useRouter();
-  
+
   // Clean URL hash on component mount - this will handle Facebook redirects
   useEffect(() => {
     cleanUrlHash();
@@ -51,7 +55,7 @@ export const Social = () => {
                   fill="currentColor"
                 />
               </svg>
-              Google
+              {dictionary?.auth?.providers?.google || "Google"}
       </Button>
       <Button
         size="lg"
@@ -65,7 +69,7 @@ export const Social = () => {
             fill="currentColor"
           />
         </svg>
-        Facebook
+        {dictionary?.auth?.providers?.facebook || "Facebook"}
       </Button>
     </div>
   );

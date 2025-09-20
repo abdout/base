@@ -11,12 +11,9 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  // CardDescription,
   CardHeader,
-  // CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -30,14 +27,19 @@ import { FormError } from "../error/form-error";
 import { FormSuccess } from "../form-success";
 import { Social } from "../social";
 
+interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
+  dictionary: any;
+}
+
 export const LoginForm = ({
+  dictionary,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) => {
+}: LoginFormProps) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
-    ? "Email already in use with different provider!"
+    ? dictionary?.auth?.errors?.emailInUseProvider || "Email already in use with different provider!"
     : "";
 
   const [showTwoFactor, setShowTwoFactor] = useState(false);
@@ -56,7 +58,7 @@ export const LoginForm = ({
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-    
+
     startTransition(() => {
       login(values, callbackUrl)
         .then((data) => {
@@ -72,7 +74,7 @@ export const LoginForm = ({
             setShowTwoFactor(true);
           }
         })
-        .catch(() => setError("Something went wrong"));
+        .catch(() => setError(dictionary?.auth?.errors?.somethingWrong || "Something went wrong"));
     });
   };
 
@@ -80,57 +82,62 @@ export const LoginForm = ({
     <div className={cn("flex flex-col gap-6 min-w-[200px] md:min-w-[350px]", className)} {...props}>
       <Card className="border-none shadow-none bg-background">
         <CardHeader className="text-center">
-          {/* <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>
-            Login with your Apple or Google account
-          </CardDescription> */}
         </CardHeader>
         <CardContent>
-          <Social />
+          <Social dictionary={dictionary} />
         </CardContent>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
               <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                 <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                  Or continue with
+                  {dictionary?.auth?.orContinueWith || "Or continue with"}
                 </span>
               </div>
-              
+
               <div className="grid gap-4">
-                {showTwoFactor ? (
+                {showTwoFactor && (
                   <FormField
                     control={form.control}
                     name="code"
                     render={({ field }) => (
-                      <FormItem className="grid gap-2">
+                      <FormItem>
                         <FormControl>
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder="Two Factor Code"
-                            
-                          />
+                          <div className="space-y-1">
+                            <label className="flex justify-between items-center">
+                              <p className="text-sm">{dictionary?.auth?.twoFactorCode || "Two Factor Code"}</p>
+                            </label>
+                            <Input
+                              {...field}
+                              disabled={isPending}
+                              placeholder="123456"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                ) : (
+                )}
+                {!showTwoFactor && (
                   <>
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
-                        <FormItem className="grid gap-2">
+                        <FormItem>
                           <FormControl>
-                            <Input
-                              {...field}
-                              id="email"
-                              type="email"
-                              disabled={isPending}
-                              placeholder="Email"
-                            />
+                            <div className="space-y-1">
+                              <label className="flex justify-between items-center">
+                                <p className="text-sm">{dictionary?.auth?.email || "Email"}</p>
+                              </label>
+                              <Input
+                                {...field}
+                                disabled={isPending}
+                                placeholder={dictionary?.auth?.enterEmail || "Enter your email"}
+                                type="email"
+                              />
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -140,50 +147,55 @@ export const LoginForm = ({
                       control={form.control}
                       name="password"
                       render={({ field }) => (
-                        <FormItem className="grid gap-2">
+                        <FormItem>
                           <FormControl>
-                            <Input
-                              {...field}
-                              id="password"
-                              type="password"
-                              disabled={isPending}
-                              placeholder="Password"
-                            />
+                            <div className="space-y-1">
+                              <label className="flex justify-between items-center">
+                                <p className="text-sm">{dictionary?.auth?.password || "Password"}</p>
+                                <Link
+                                  href="/reset"
+                                  className="text-sm font-normal text-muted-foreground hover:text-foreground"
+                                >
+                                  {dictionary?.auth?.forgotPassword || "Forgot password?"}
+                                </Link>
+                              </label>
+                              <Input
+                                {...field}
+                                disabled={isPending}
+                                placeholder={dictionary?.auth?.enterPassword || "Enter your password"}
+                                type="password"
+                              />
+                            </div>
                           </FormControl>
-                          <Link
-                            href="/auth/reset"
-                            className="text-sm text-start hover:underline underline-offset-4"
-                          >
-                            Forgot password?
-                          </Link>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </>
                 )}
-                
-                <FormError message={error || urlError} />
-                <FormSuccess message={success} />
-                
-                <Button disabled={isPending} type="submit" className="w-full h-11 text-base">
-                  {showTwoFactor ? "Confirm" : "Login"}
-                </Button>
               </div>
-              
+
+              <FormError message={error || urlError} />
+              <FormSuccess message={success} />
+
+              <Button disabled={isPending} type="submit" className="w-full">
+                {showTwoFactor
+                  ? (dictionary?.auth?.confirm || "Confirm")
+                  : (dictionary?.auth?.login || "Login")
+                }
+              </Button>
+
               <div className="text-center text-sm">
-                <Link href="/join" className="hover:underline underline-offset-4">
-                  Don&apos;t have an account?
+                {dictionary?.auth?.dontHaveAccount || "Don't have an account?"}
+                {" "}
+                <Link href="/register" className="text-primary hover:underline">
+                  {dictionary?.auth?.signUp || "Sign Up"}
                 </Link>
               </div>
             </form>
           </Form>
         </CardContent>
       </Card>
-      {/* <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary">
-        By clicking continue, you agree to our <br/> <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </div> */}
     </div>
   );
 };

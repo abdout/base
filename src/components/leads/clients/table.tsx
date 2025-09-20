@@ -17,6 +17,7 @@ import { DataTableAdvancedToolbar } from "@/components/table/data-table/data-tab
 import { DataTableFilterbar } from "@/components/table/data-table/data-table-filterbar";
 import { Button } from "@/components/ui/button";
 import { Plus, Upload, Download } from "lucide-react";
+import { useModal } from "@/components/atom/modal/context";
 import {
   Sheet,
   SheetContent,
@@ -25,15 +26,11 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { leadColumns } from "./columns";
-import { LeadForm } from "./form";
 import { PasteImportInterface } from "../paste-import";
 import { LeadRow } from "./types";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { leadCreateSchema, leadImportSchema } from "./validation";
+import { leadImportSchema } from "./validation";
 import { createLead, deleteLeads } from "./actions";
 import { toast } from "sonner";
-import { z } from "zod";
 import {
   LEAD_STATUS_OPTIONS,
   LEAD_SOURCE_OPTIONS,
@@ -53,7 +50,7 @@ interface LeadsTableProps {
 
 export function LeadsTable({ data, pagination, dictionary }: LeadsTableProps) {
   const router = useRouter();
-  const [createOpen, setCreateOpen] = useState(false);
+  const { openModal } = useModal();
   const [importOpen, setImportOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -88,38 +85,6 @@ export function LeadsTable({ data, pagination, dictionary }: LeadsTableProps) {
     manualPagination: true,
   });
 
-  const form = useForm<z.infer<typeof leadCreateSchema>>({
-    resolver: zodResolver(leadCreateSchema),
-    defaultValues: {
-      name: "",
-      company: "",
-      email: "",
-      phone: "",
-      website: "",
-      description: "",
-      notes: "",
-      status: "NEW",
-      source: "MANUAL",
-      priority: "MEDIUM",
-      tags: [],
-    },
-  });
-
-  const handleCreate = async (data: z.infer<typeof leadCreateSchema>) => {
-    try {
-      const result = await createLead(data);
-      if (result.success) {
-        toast.success(dictionary.leads.messages.leadCreated);
-        setCreateOpen(false);
-        form.reset();
-        router.refresh();
-      } else {
-        toast.error(result.error || dictionary.leads.errors.createFailed);
-      }
-    } catch (error) {
-      toast.error(dictionary.leads.errors.unexpected);
-    }
-  };
 
   const handleBulkDelete = async () => {
     const selectedRowIds = table.getFilteredSelectedRowModel().rows.map(row => row.id);
@@ -294,7 +259,7 @@ export function LeadsTable({ data, pagination, dictionary }: LeadsTableProps) {
             </Button>
             <Button
               size="sm"
-              onClick={() => setCreateOpen(true)}
+              onClick={() => openModal("new")}
             >
               <Plus className="mr-2 h-4 w-4" />
               {dictionary.leads.actions.create}
@@ -321,25 +286,6 @@ export function LeadsTable({ data, pagination, dictionary }: LeadsTableProps) {
         </div>
       )}
 
-      {/* Create Lead Sheet */}
-      <Sheet open={createOpen} onOpenChange={setCreateOpen}>
-        <SheetContent className="sm:max-w-2xl overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>{dictionary.leads.form.createTitle}</SheetTitle>
-            <SheetDescription>
-              {dictionary.leads.form.createDescription}
-            </SheetDescription>
-          </SheetHeader>
-          <div className="mt-6">
-            <LeadForm
-              form={form}
-              onSubmit={handleCreate}
-              mode="create"
-              dictionary={dictionary}
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
 
       {/* Import Sheet */}
       <Sheet open={importOpen} onOpenChange={setImportOpen}>

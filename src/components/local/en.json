@@ -142,7 +142,19 @@
     "enterEmail": "Enter your email",
     "enterPassword": "Enter your password",
     "welcomeBack": "Welcome back",
-    "createNewAccount": "Create a new account"
+    "createNewAccount": "Create a new account",
+    "orContinueWith": "Or continue with",
+    "twoFactorCode": "Two Factor Code",
+    "confirm": "Confirm",
+    "login": "Login",
+    "errors": {
+      "emailInUseProvider": "Email already in use with different provider!",
+      "somethingWrong": "Something went wrong"
+    },
+    "providers": {
+      "google": "Google",
+      "facebook": "Facebook"
+    }
   },
   "marketing": {
     "hero": {
@@ -155,252 +167,6 @@
     "features": {
       "title": "Features",
       "subtitle": "Everything you need to build your next project"
-    },
-    "pricing": {
-      "title": "Pricing",
-      "subtitle": "Choose the plan that works for you",
-      "monthly": "Monthly",
-      "yearly": "Yearly",
-      "free": "Free",
-      "pro": "Pro",
-      "enterprise": "Enterprise"
-    },
-    "logoCloud": {
-      "trustedBy": "Trusted by amazing clients"
-    },
-    "parallax": {
-      "design": "Design",
-      "automate": "Automate", 
-      "analytics": "Analytics",
-      "efficient": "Efficient"
-    },
-    "ready": {
-      "title": "Ready to begin a journey of wonder?",
-      "description": "Every great brand started with a single step. Take yours today and join hundreds of brands who have wrote their story in our magical world of design.",
-      "startJourney": "Let the journey begin",
-      "scheduleMeeting": "Schedule a Meeting"
-    },
-    "openSource": {
-      "title": "Proudly Open Source",
-      "description": "Databayt is open source and powered by open source software.",
-      "descriptionLine2": "The code is available on",
-      "github": "GitHub",
-      "contributors": "Contributors"
-    },
-    "readyToBuild": {
-      "quote": "This platform transformed how we manage client relationships. The intuitive design and powerful features helped us scale from a small agency to serving Fortune 500 companies.",
-      "author": "Ahmed Elardi",
-      "position": "CEO, Pixel Studios"
-    },
-    "footer": {
-      "product": "Product",
-      "company": "Company", 
-      "services": "Services",
-      "support": "Support",
-      "readyToBuild": "Ready to build?",
-      "getStarted": "Get started"
-    },
-    "stack": {
-      "title": "Stack",
-      "descriptionMobile": "Databayt leverages state-of-the-art technology to craft innovative applications.",
-      "description": "Databayt leverages state-of-the-art technology to craft innovative and modern applications, delivering seamless performance.",
-      "nextjs": {
-        "title": "Next.js 15",
-        "description": "App dir, Routing, Layouts, Loading UI and API routes."
-      },
-      "react": {
-        "title": "React 19", 
-        "description": "Server and Client Components.\nUse hook."
-      },
-      "database": {
-        "title": "Database",
-        "description": "ORM using Prisma and deployed on PlanetScale."
-      },
-      "components": {
-        "title": "Components",
-        "description": "UI components built using Radix UI and styled with Tailwind CSS."
-      },
-      "authentication": {
-        "title": "Authentication",
-        "description": "Secure auth using Auth.js with role-based access."
-      },
-      "subscriptions": {
-        "title": "Subscriptions",
-        "description": "Free and paid subscriptions using\nStripe."
-      }
-    },
-    "productsSection": {
-      "title": "Product",
-      "description": "Innovative automation solutions designed to save the origin of all value, time."
-    },
-    "projectsSection": {
-      "title": "Project",
-      "description": "Portfolio showcases, we've crafted for diverse industries.",
-      "tabs": {
-        "featured": "Featured",
-        "company": "Company",
-        "education": "Education",
-        "health": "Health",
-        "ecommerce": "E-commerce",
-        "states": "States"
-      },
-      "tabsMobile": {
-        "featured": "Featured",
-        "company": "Co",
-        "education": "Edu",
-        "health": "Health",
-        "ecommerce": "E-comm",
-        "states": "States"
-      }
-    },
-    "projects": {
-      "mkan": {
-        "title": "Mkan",
-        "description": "Airbnb like Real estate platform, diversity of properties and hotels",
-        "category": "Real Estate Platform"
-      },
-      "hogwarts": {
-        "title": "Hogwarts",
-        "description": "Organization automation, attendance, exams, grades and more",
-        "category": "Education System"
-      },
-      "nmbd": {
-        "title": "NMBD",
-        "description": "Community national movement for building & development",
-        "category": "Development Organization"
-      },
-      "shifa": {
-        "title": "Shifa",
-        "description": "Comprehensive healthcare management system for hospitals and clinics",
-        "category": "Healthcare"
-      },
-      "giats": {
-        "title": "Giats",
-        "description": "Say hi to Giats portfolio showcasing creative design and development work",
-        "category": "E-commerce"
-      },
-      "camille": {
-        "title": "Camille",
-        "description": "Retail e-commerce platform for modern online shopping experience",
-        "category": "E-commerce"
-      },
-      "acme": {
-        "title": "Acme",
-        "description": "Company automation. Managing projects, reports, calculations, and docs",
-        "category": "Company"
-      },
-      "accessories": {
-        "title": "Souq",
-        "description": "Premium tech accessories marketplace with curated collection",
-        "category": "E-commerce"
-      },
-      "nike": {
-        "title": "Nike",
-        "description": "Athletic footwear and apparel with personalized shopping experience",
-        "category": "E-commerce"
-      }
-    },
-    "featureCards": {
-      "discovery": {
-        "title": "Discovery",
-        "subtitle": "& Research"
-      },
-      "design": {
-        "title": "Design",
-        "subtitle": "& Prototyping"
-      },
-      "development": {
-        "title": "Development",
-        "subtitle": "& Testing"
-      },
-      "launch": {
-        "title": "Launch",
-        "subtitle": "& Support"
-      }
-    },
-    "content": {
-      "storyTeller": {
-        "logo": "Story TELLER",
-        "title": "AI Story Generation",
-        "description": "Transform your ideas into compelling stories with our talented storytelling team. Create engaging narratives, scripts, and content that captivates your audience.",
-        "ctaText": "Start Writing",
-        "secondaryCtaText": "Learn More"
-      },
-      "dreamMachine": {
-        "logo": "Dream MACHINE",
-        "title": "AI-Powered Video Creation",
-        "description": "Bring your ideas to life — ideate, visualize, and design unique themes with ease. Share your dreams with the world using our intuitive wizard.",
-        "ctaText": "Try Now",
-        "secondaryCtaText": "Get Expert"
-      },
-      "codebase": {
-        "logo": "CODEBASE",
-        "title": "AI Story Generation",
-        "description": "Automate the boring. at Databayt we're building codebase for business automation.",
-        "ctaText": "Codebase",
-        "secondaryCtaText": "Learn more"
-      },
-      "acme": {
-        "logo": "HOGWARTS",
-        "title": "Education Management System",
-        "description": "Education automation. managing grades, attendance, assignments, and student progress tracking.",
-        "ctaText": "Live Preview",
-        "secondaryCtaText": "Get App"
-      }
-    },
-    "about": {
-      "backLink": "back",
-      "introduction": {
-        "paragraph1": "Automate the boring. at Databayt we're building codebase for business automation, one atomic component at a time. Every line of code is open source, every contribution is valued, and every developer may shape the future of how businesses operate.",
-        "paragraph2": "We sell the origin of all value — we sell Time, the currency that drives the world — what if you could reclaim yours and focus on what truly matters? It's more than a service — it's an escape from the matrix. A restoration of time through the elimination of repetitive tasks, streamlined operations, and automated processes. Break free. Reclaim your hours.",
-        "paragraph3": "The Repository of Wonders. Think of our codebase as a living library where every contribution becomes part of something greater. From atomic components to complete templates, from blocks to micro-services to full automation solutions—we're creating the building blocks that will power tomorrow's businesses.",
-        "paragraph4": "Follow along as we figure this out together. This isn't just about building software; it's about creating a collaborative ecosystem where developers, businesses, and innovators unite to solve real problems. Every contribution you make doesn't just help one project—it becomes part of a growing foundation that serves countless businesses worldwide."
-      },
-      "whatWeDo": {
-        "title": "What We Do",
-        "development": "Development - Enterprise-grade applications and platforms",
-        "automation": "Automation - Streamlined workflows and process optimization",
-        "consulting": "Consulting - Technical expertise and implementation support", 
-        "openSource": "Open Source - Community-driven development and innovation"
-      },
-      "businessModel": {
-        "title": "Business Model",
-        "perProject": {
-          "title": "Per Project",
-          "description": "Custom solutions tailored to specific client requirements and business processes. Each project delivers unique automation systems designed to solve particular challenges and operational needs."
-        },
-        "partners": {
-          "title": "Partners", 
-          "description": "Partnership opportunities for businesses seeking to outsource technology development, access specialized talent for temporary projects and specific technical expertise."
-        },
-        "codebase": {
-          "title": "Codebase",
-          "description": "Codebase executes the majority of the task, through accumulated, reusable components. Contributors who expand this foundation earn a share of the value it generates."
-        },
-        "saas": {
-          "title": "SaaS",
-          "description": "Ready-to-deploy software products sold to multiple organizations with similar needs. act as a go-to central hub for businesses seeking automation solutions."
-        }
-      },
-      "coreValues": {
-        "title": "Core Values",
-        "transparency": {
-          "title": "Transparency",
-          "description": "Every decision, from technical architecture to business strategy, is documented and accessible to the community. We use GitHub to manage our codebase and discussions, ensuring transparency, traceability, and open collaboration. Contributions are publicly tracked, so every developer can see their impact and know the process is clear and fair. We believe this openness builds trust and enables better contributions."
-        },
-        "innovation": {
-          "title": "Innovation",
-          "description": "Our best ideas come from our diverse community of developers, business professionals, and users. We actively encourage contributions and value every perspective. We're actively building in: Business Automation, Data Analytics, AI Agents, Blockchain, and Distributed Computing."
-        },
-        "growth": {
-          "title": "Growth",
-          "description": "We balance rapid innovation with long-term sustainability, ensuring our solutions remain robust and our business model benefits all stakeholders."
-        },
-        "excellence": {
-          "title": "Excellence",
-          "description": "Every product we ship meets the highest standards of quality, security, and performance. Our reputation is built on reliable, enterprise-grade solutions."
-        }
-      }
     },
     "pricing": {
       "badge": "ROI Guaranteed",
@@ -567,6 +333,243 @@
             "answer": "Absolutely! For enterprise needs, we offer custom solutions with dedicated teams, SLAs, and specialized support. Contact us for a tailored quote."
           }
         ]
+      }
+    },
+    "logoCloud": {
+      "trustedBy": "Trusted by amazing clients"
+    },
+    "parallax": {
+      "design": "Design",
+      "automate": "Automate",
+      "analytics": "Analytics",
+      "efficient": "Efficient"
+    },
+    "ready": {
+      "title": "Ready to begin a journey of wonder?",
+      "description": "Every great brand started with a single step. Take yours today and join hundreds of brands who have wrote their story in our magical world of design.",
+      "startJourney": "Let the journey begin",
+      "scheduleMeeting": "Schedule a Meeting"
+    },
+    "openSource": {
+      "title": "Proudly Open Source",
+      "description": "Databayt is open source and powered by open source software.",
+      "descriptionLine2": "The code is available on",
+      "github": "GitHub",
+      "contributors": "Contributors"
+    },
+    "readyToBuild": {
+      "quote": "This platform transformed how we manage client relationships. The intuitive design and powerful features helped us scale from a small agency to serving Fortune 500 companies.",
+      "author": "Ahmed Elardi",
+      "position": "CEO, Pixel Studios"
+    },
+    "footer": {
+      "product": "Product",
+      "company": "Company",
+      "services": "Services",
+      "support": "Support",
+      "readyToBuild": "Ready to build?",
+      "getStarted": "Get started"
+    },
+    "stack": {
+      "title": "Stack",
+      "descriptionMobile": "Databayt leverages state-of-the-art technology to craft innovative applications.",
+      "description": "Databayt leverages state-of-the-art technology to craft innovative and modern applications, delivering seamless performance.",
+      "nextjs": {
+        "title": "Next.js 15",
+        "description": "App dir, Routing, Layouts, Loading UI and API routes."
+      },
+      "react": {
+        "title": "React 19",
+        "description": "Server and Client Components.\nUse hook."
+      },
+      "database": {
+        "title": "Database",
+        "description": "ORM using Prisma and deployed on PlanetScale."
+      },
+      "components": {
+        "title": "Components",
+        "description": "UI components built using Radix UI and styled with Tailwind CSS."
+      },
+      "authentication": {
+        "title": "Authentication",
+        "description": "Secure auth using Auth.js with role-based access."
+      },
+      "subscriptions": {
+        "title": "Subscriptions",
+        "description": "Free and paid subscriptions using\nStripe."
+      }
+    },
+    "productsSection": {
+      "title": "Product",
+      "description": "Innovative automation solutions designed to save the origin of all value, time."
+    },
+    "projectsSection": {
+      "title": "Project",
+      "description": "Portfolio showcases, we've crafted for diverse industries.",
+      "tabs": {
+        "featured": "Featured",
+        "company": "Company",
+        "education": "Education",
+        "health": "Health",
+        "ecommerce": "E-commerce",
+        "states": "States"
+      },
+      "tabsMobile": {
+        "featured": "Featured",
+        "company": "Co",
+        "education": "Edu",
+        "health": "Health",
+        "ecommerce": "E-comm",
+        "states": "States"
+      }
+    },
+    "projects": {
+      "mkan": {
+        "title": "Mkan",
+        "description": "Airbnb like Real estate platform, diversity of properties and hotels",
+        "category": "Real Estate Platform"
+      },
+      "hogwarts": {
+        "title": "Hogwarts",
+        "description": "Organization automation, attendance, exams, grades and more",
+        "category": "Education System"
+      },
+      "nmbd": {
+        "title": "NMBD",
+        "description": "Community national movement for building & development",
+        "category": "Development Organization"
+      },
+      "shifa": {
+        "title": "Shifa",
+        "description": "Comprehensive healthcare management system for hospitals and clinics",
+        "category": "Healthcare"
+      },
+      "giats": {
+        "title": "Giats",
+        "description": "Say hi to Giats portfolio showcasing creative design and development work",
+        "category": "E-commerce"
+      },
+      "camille": {
+        "title": "Camille",
+        "description": "Retail e-commerce platform for modern online shopping experience",
+        "category": "E-commerce"
+      },
+      "acme": {
+        "title": "Acme",
+        "description": "Company automation. Managing projects, reports, calculations, and docs",
+        "category": "Company"
+      },
+      "accessories": {
+        "title": "Souq",
+        "description": "Premium tech accessories marketplace with curated collection",
+        "category": "E-commerce"
+      },
+      "nike": {
+        "title": "Nike",
+        "description": "Athletic footwear and apparel with personalized shopping experience",
+        "category": "E-commerce"
+      }
+    },
+    "featureCards": {
+      "discovery": {
+        "title": "Discovery",
+        "subtitle": "& Research"
+      },
+      "design": {
+        "title": "Design",
+        "subtitle": "& Prototyping"
+      },
+      "development": {
+        "title": "Development",
+        "subtitle": "& Testing"
+      },
+      "launch": {
+        "title": "Launch",
+        "subtitle": "& Support"
+      }
+    },
+    "content": {
+      "storyTeller": {
+        "logo": "Story TELLER",
+        "title": "AI Story Generation",
+        "description": "Transform your ideas into compelling stories with our talented storytelling team. Create engaging narratives, scripts, and content that captivates your audience.",
+        "ctaText": "Start Writing",
+        "secondaryCtaText": "Learn More"
+      },
+      "dreamMachine": {
+        "logo": "Dream MACHINE",
+        "title": "AI-Powered Video Creation",
+        "description": "Bring your ideas to life — ideate, visualize, and design unique themes with ease. Share your dreams with the world using our intuitive wizard.",
+        "ctaText": "Try Now",
+        "secondaryCtaText": "Get Expert"
+      },
+      "codebase": {
+        "logo": "CODEBASE",
+        "title": "AI Story Generation",
+        "description": "Automate the boring. at Databayt we're building codebase for business automation.",
+        "ctaText": "Codebase",
+        "secondaryCtaText": "Learn more"
+      },
+      "acme": {
+        "logo": "HOGWARTS",
+        "title": "Education Management System",
+        "description": "Education automation. managing grades, attendance, assignments, and student progress tracking.",
+        "ctaText": "Live Preview",
+        "secondaryCtaText": "Get App"
+      }
+    },
+    "about": {
+      "backLink": "back",
+      "introduction": {
+        "paragraph1": "Automate the boring. at Databayt we're building codebase for business automation, one atomic component at a time. Every line of code is open source, every contribution is valued, and every developer may shape the future of how businesses operate.",
+        "paragraph2": "We sell the origin of all value — we sell Time, the currency that drives the world — what if you could reclaim yours and focus on what truly matters? It's more than a service — it's an escape from the matrix. A restoration of time through the elimination of repetitive tasks, streamlined operations, and automated processes. Break free. Reclaim your hours.",
+        "paragraph3": "The Repository of Wonders. Think of our codebase as a living library where every contribution becomes part of something greater. From atomic components to complete templates, from blocks to micro-services to full automation solutions—we're creating the building blocks that will power tomorrow's businesses.",
+        "paragraph4": "Follow along as we figure this out together. This isn't just about building software; it's about creating a collaborative ecosystem where developers, businesses, and innovators unite to solve real problems. Every contribution you make doesn't just help one project—it becomes part of a growing foundation that serves countless businesses worldwide."
+      },
+      "whatWeDo": {
+        "title": "What We Do",
+        "development": "Development - Enterprise-grade applications and platforms",
+        "automation": "Automation - Streamlined workflows and process optimization",
+        "consulting": "Consulting - Technical expertise and implementation support",
+        "openSource": "Open Source - Community-driven development and innovation"
+      },
+      "businessModel": {
+        "title": "Business Model",
+        "perProject": {
+          "title": "Per Project",
+          "description": "Custom solutions tailored to specific client requirements and business processes. Each project delivers unique automation systems designed to solve particular challenges and operational needs."
+        },
+        "partners": {
+          "title": "Partners",
+          "description": "Partnership opportunities for businesses seeking to outsource technology development, access specialized talent for temporary projects and specific technical expertise."
+        },
+        "codebase": {
+          "title": "Codebase",
+          "description": "Codebase executes the majority of the task, through accumulated, reusable components. Contributors who expand this foundation earn a share of the value it generates."
+        },
+        "saas": {
+          "title": "SaaS",
+          "description": "Ready-to-deploy software products sold to multiple organizations with similar needs. act as a go-to central hub for businesses seeking automation solutions."
+        }
+      },
+      "coreValues": {
+        "title": "Core Values",
+        "transparency": {
+          "title": "Transparency",
+          "description": "Every decision, from technical architecture to business strategy, is documented and accessible to the community. We use GitHub to manage our codebase and discussions, ensuring transparency, traceability, and open collaboration. Contributions are publicly tracked, so every developer can see their impact and know the process is clear and fair. We believe this openness builds trust and enables better contributions."
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Our best ideas come from our diverse community of developers, business professionals, and users. We actively encourage contributions and value every perspective. We're actively building in: Business Automation, Data Analytics, AI Agents, Blockchain, and Distributed Computing."
+        },
+        "growth": {
+          "title": "Growth",
+          "description": "We balance rapid innovation with long-term sustainability, ensuring our solutions remain robust and our business model benefits all stakeholders."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "Every product we ship meets the highest standards of quality, security, and performance. Our reputation is built on reliable, enterprise-grade solutions."
+        }
       }
     },
     "services": {
@@ -826,6 +829,238 @@
     "music": "Music",
     "authentication": "Authentication"
   },
+  "leads": {
+    "title": "Leads",
+    "description": "Manage and track your potential customers",
+    "totalLeads": "total leads",
+    "newLead": "New Lead",
+    "import": {
+      "title": "Import Leads",
+      "description": "Paste raw lead information and we'll extract the details automatically using AI.",
+      "placeholder": "Paste raw lead information here. Separate multiple leads with double line breaks...",
+      "importing": "Importing leads...",
+      "importButton": "Import Leads",
+      "previewDetection": "Preview Detection",
+      "sampleData": "Use Sample Data",
+      "extracting": "Extracting...",
+      "confidence": "AI Extraction Confidence",
+      "textImport": "Text Import",
+      "detectedFields": "Detected Fields",
+      "validationIssues": "Validation Issues",
+      "linesDetected": "lines detected",
+      "processing": "Processing...",
+      "useSample": "Use Sample Data",
+      "analyzingData": "Analyzing data structure...",
+      "noPatterns": "No recognizable data patterns found",
+      "noContact": "No contact information (email or phone) detected",
+      "validating": "Validating data...",
+      "checkingDuplicates": "Checking for duplicates...",
+      "success": "Successfully imported",
+      "leads": "leads",
+      "failed": "Import failed"
+    },
+    "export": "Export",
+    "bulkImport": "Bulk Import",
+    "pasteImport": {
+      "title": "Import Leads",
+      "description": "Paste raw lead information and we'll extract the details automatically using AI.",
+      "placeholder": "Paste raw lead information here. Separate multiple leads with double line breaks...",
+      "importing": "Importing leads...",
+      "importButton": "Import Leads",
+      "previewDetection": "Preview Detection",
+      "sampleData": "Use Sample Data",
+      "extracting": "Extracting...",
+      "confidence": "AI Extraction Confidence",
+      "textImport": "Text Import",
+      "detectedFields": "Detected Fields",
+      "validationIssues": "Validation Issues",
+      "linesDetected": "lines detected",
+      "processing": "Processing...",
+      "useSample": "Use Sample Data",
+      "analyzingData": "Analyzing data structure...",
+      "noPatterns": "No recognizable data patterns found",
+      "noContact": "No contact information (email or phone) detected",
+      "validating": "Validating data...",
+      "checkingDuplicates": "Checking for duplicates...",
+      "success": "Successfully imported",
+      "leads": "leads",
+      "failed": "Import failed"
+    },
+    "form": {
+      "createTitle": "Create New Lead",
+      "createDescription": "Add a new lead to your pipeline. Fill in the details below.",
+      "editTitle": "Edit Lead",
+      "editDescription": "Update the lead information.",
+      "basicInfo": "Basic Information",
+      "coreDetails": "Core details about the lead",
+      "detailsNotes": "Details & Notes",
+      "additionalInfo": "Additional information about the lead",
+      "classification": "Classification",
+      "categorize": "Categorize and prioritize the lead",
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "nameRequired": "Name is required",
+      "company": "Company",
+      "companyPlaceholder": "Acme Corporation",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "emailInvalid": "Invalid email format",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "website": "Website",
+      "websitePlaceholder": "https://example.com",
+      "description": "Description",
+      "descriptionPlaceholder": "Brief description or role...",
+      "notes": "Notes",
+      "notesPlaceholder": "Additional notes or context...",
+      "status": "Status",
+      "selectStatus": "Select status",
+      "source": "Source",
+      "selectSource": "Select source",
+      "priority": "Priority",
+      "selectPriority": "Select priority",
+      "tags": "Tags",
+      "score": "Score",
+      "reset": "Reset",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "createLead": "Create Lead",
+      "updateLead": "Update Lead",
+      "aiConfidence": "AI Extraction Confidence",
+      "basicInfoDescription": "Core details about the lead",
+      "details": "Details & Notes",
+      "detailsDescription": "Additional information about the lead",
+      "classificationDescription": "Categorize and prioritize the lead",
+      "extracting": "Extracting..."
+    },
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "status": "Status",
+      "source": "Source",
+      "priority": "Priority",
+      "score": "Score",
+      "created": "Created",
+      "actions": "Actions",
+      "selectAll": "Select all",
+      "selectRow": "Select row",
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "sendEmail": "Send Email",
+      "call": "Call",
+      "bulkDelete": "Delete Selected",
+      "rowsSelected": "row(s) selected",
+      "noResults": "No leads found",
+      "errorLoading": "Error loading leads",
+      "totalLeads": "total leads"
+    },
+    "status": {
+      "new": "New",
+      "contacted": "Contacted",
+      "qualified": "Qualified",
+      "proposal": "Proposal",
+      "negotiation": "Negotiation",
+      "closedWon": "Won",
+      "closedLost": "Lost",
+      "archived": "Archived"
+    },
+    "source": {
+      "manual": "Manual Entry",
+      "import": "Imported",
+      "api": "API",
+      "website": "Website",
+      "referral": "Referral",
+      "socialMedia": "Social Media",
+      "emailCampaign": "Email Campaign",
+      "coldCall": "Cold Call",
+      "conference": "Conference",
+      "partner": "Partner"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "scoreRange": {
+      "cold": "Cold",
+      "warm": "Warm",
+      "hot": "Hot",
+      "veryHot": "Very Hot"
+    },
+    "messages": {
+      "createSuccess": "Lead created successfully",
+      "updateSuccess": "Lead updated successfully",
+      "deleteSuccess": "Lead deleted successfully",
+      "importSuccess": "Import completed successfully",
+      "exportSuccess": "Export completed successfully",
+      "duplicateDetected": "A lead with this email already exists",
+      "extractionFailed": "Failed to extract lead information",
+      "enrichmentFailed": "Failed to enrich lead data",
+      "importFailed": "Failed to import some leads",
+      "networkError": "Network error. Please check your connection",
+      "permissionDenied": "You don't have permission to perform this action",
+      "validationError": "Please check all required fields",
+      "leadCreated": "Lead created successfully",
+      "importComingSoon": "Import functionality coming soon!",
+      "exportComingSoon": "Export functionality coming soon!"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "Search by name, email, or company...",
+      "status": "Status",
+      "allStatuses": "All Statuses",
+      "source": "Source",
+      "allSources": "All Sources",
+      "priority": "Priority",
+      "allPriorities": "All Priorities",
+      "dateRange": "Date Range",
+      "scoreRange": "Score Range",
+      "assigned": "Assigned",
+      "all": "All",
+      "assignedOnly": "Assigned",
+      "unassignedOnly": "Unassigned",
+      "clearFilters": "Clear Filters"
+    },
+    "stats": {
+      "total": "Total Leads",
+      "new": "New This Week",
+      "qualified": "Qualified",
+      "conversionRate": "Conversion Rate",
+      "averageScore": "Average Score"
+    },
+    "actions": {
+      "label": "Actions",
+      "create": "New Lead",
+      "import": "Import",
+      "export": "Export",
+      "view": "View Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteSelected": "Delete Selected",
+      "email": "Send Email",
+      "call": "Call"
+    },
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "status": "Status",
+      "source": "Source",
+      "priority": "Priority",
+      "score": "Score",
+      "created": "Created"
+    },
+    "errors": {
+      "loadingFailed": "Error loading leads",
+      "unexpected": "An unexpected error occurred",
+      "createFailed": "Failed to create lead",
+      "deleteFailed": "Failed to delete leads"
+    }
+  },
   "cards": {
     "stats": {
       "totalRevenue": "Total Revenue",
@@ -854,17 +1089,7 @@
       "acceptAll": "Accept All",
       "rejectAll": "Reject All"
     },
-    "createAccount": {
-      "title": "Create an account",
-      "description": "Enter your email below to create your account",
-      "github": "GitHub",
-      "google": "Google",
-      "orContinue": "Or continue with",
-      "email": "Email",
-      "password": "Password",
-      "emailPlaceholder": "m@example.com",
-      "createButton": "Create account"
-    },
+    "createAccount": "Create an account",
     "metric": {
       "title": "Exercise Minutes",
       "description": "Your exercise minutes are ahead of where you normally are.",
@@ -923,7 +1148,6 @@
     "revenueChange": "+20.1% from last month",
     "subscriptionsAmount": "+2350",
     "subscriptionsChange": "+180.1% from last month",
-    "createAccount": "Create an account",
     "enterEmailBelow": "Enter your email below to create your account",
     "continueWith": "Or continue with",
     "strictlyNecessary": "Strictly Necessary",

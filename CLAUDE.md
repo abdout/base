@@ -1,6 +1,6 @@
-# CLAUDE.md - Codebase Guide for Claude Code
+# CLAUDE.md
 
-This document serves as a guide for Claude Code instances working with this Next.js 15 application codebase.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 A Next.js 15 application with authentication, internationalization, and a comprehensive documentation system. The project uses the App Router, Edge Runtime compatibility, and modern React patterns.
@@ -33,14 +33,14 @@ src/
 │   ├── (expose)/               # Mixed access pages
 │   │   ├── (protected)/        # Auth-required pages
 │   │   └── (public)/           # Public pages
-│   ├── docs/                   # Documentation system
-│   └── globals.css             # Global styles + Tailwind
+│   ├── (blocks)/               # UI showcase pages
+│   └── docs/                   # Documentation system
 ├── components/
 │   ├── atom/                   # Atomic design components
 │   ├── auth/                   # Authentication components
 │   ├── chatbot/                # AI chatbot system
 │   ├── docs/                   # Documentation components
-│   ├── internationalization/  # i18n dictionaries & config
+│   ├── local/                  # i18n dictionaries & config
 │   ├── root/                   # Landing page components
 │   ├── table/                  # Data table components
 │   ├── template/               # Layout templates
@@ -70,7 +70,8 @@ src/
 - Supported locales: English (en), Arabic (ar)
 - RTL support for Arabic
 - URL structure: `/[lang]/path`
-- Dictionaries in `src/components/internationalization/`
+- Dictionaries in `src/components/local/`
+- Config in `src/components/local/config.ts`
 
 ### 3. Authentication Flow
 - Email/password with verification
@@ -78,6 +79,7 @@ src/
 - Two-factor authentication support
 - Role-based access (USER, ADMIN)
 - Protected routes via middleware
+- Platform routes (/dashboard, /project, /task, /wallet, /daily, /resource) require auth
 
 ### 4. Styling System
 - Tailwind CSS v4 with CSS variables
@@ -185,6 +187,14 @@ Required environment variables:
 DATABASE_URL=           # PostgreSQL connection string
 AUTH_SECRET=           # NextAuth secret (generate with: openssl rand -hex 32)
 NEXTAUTH_URL=          # Application URL
+```
+
+Optional for OAuth:
+```env
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 ```
 
 ## Known Issues & Workarounds
